@@ -41,3 +41,42 @@ export function getParentOptions(
 ): Category[] {
   return categories.filter((category) => category.id !== excludeId);
 }
+
+
+// Orders categories so children appear right after their parent,
+// using the backend's own `level` field for indentation in the UI.
+export const sortCategoryTree = (categories: Category[]): Category[] => {
+  const byParent = new Map<number | null, Category[]>();
+  categories.forEach((c) => {
+    const key = c.parentId;
+    if (!byParent.has(key)) byParent.set(key, []);
+    byParent.get(key)!.push(c);
+  });
+
+  const result: Category[] = [];
+  const walk = (parentId: number | null) => {
+    (byParent.get(parentId) ?? []).forEach((child) => {
+      result.push(child);
+      walk(child.id);
+    });
+  };
+  walk(null);
+  return result;
+};
+
+// Prevents picking a category's own descendant as its new parent
+// when editing — that would create a circular hierarchy.
+export const getDescendantIds = (
+  categories: Category[],
+  categoryId: number
+): number[] => {
+  const children = categories.filter((c) => c.parentId === categoryId);
+  return children.reduce<number[]>(
+    (acc, child) => [
+      ...acc,
+      child.id,
+      ...getDescendantIds(categories, child.id),
+    ],
+    []
+  );
+};

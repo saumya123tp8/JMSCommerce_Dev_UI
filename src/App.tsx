@@ -9,12 +9,12 @@ import Categories from './pages/Categories'
 import CartPage from './pages/CartPage'
 import Search from './pages/Search'
 import CategoryPage from './pages/CategoryPage'
-import UpdateCategory from './pages/admin/UpdateCategory'
+import UpdateCategory from './pages/admin/categories/UpdateCategory'
 import Dashboard from './pages/user/Dashboard'
 import Orders from './pages/user/Orders'
 import Profile from './pages/user/Profile'
 import AdminDashboard from './pages/admin/AdminDashboard'
-import CreateCategory from './pages/admin/CreateCategory'
+import CreateCategory from './pages/admin/categories/CreateCategory'
 import CreateProduct from './pages/admin/CreateProduct'
 import UpdateProducts from './pages/admin/UpdateProducts'
 import AdminOrderList from './pages/admin/AdminOrderList'
@@ -27,6 +27,11 @@ import PrivateRoute from './utilitity/routes/PrivateRoute'
 import AdminRoute from './utilitity/routes/AdminRoute'
 import OauthSuccess from './pages/oathResponsePage/OauthSuccess';
 import OauthFail from './pages/oathResponsePage/OauthFail';
+import AdminSpecificationForm from './pages/admin/specifications/AdminSpecificationForm'
+import AdminCategoryForm from './pages/admin/categories/AdminCategoryForm'
+import AdminCategoryList from './pages/admin/categories/AdminCategoryList'
+import AdminSpecificationList from './pages/admin/specifications/AdminSpecificationList'
+import AdminLayout from './pages/admin/AdminLayout'
 // import { Card } from './components/ui/card'
 
 function App() {
@@ -47,14 +52,25 @@ function App() {
           <Route path="user/orders" element={<Orders />} />
           <Route path="user/profile" element={<Profile />} />
         </Route>
-        <Route path="/dashboard" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/create-category" element={<CreateCategory />} />
-          <Route path="admin/category/:id" element={<UpdateCategory />} />
-          <Route path="admin/create-product" element={<CreateProduct />} />
-          <Route path="admin/product/:slug" element={<UpdateProducts />} />
-          <Route path="admin/orders" element={<AdminOrderList />} />
-          <Route path="admin/products" element={<CategoryProductList />} />
+        <Route path="/dashboard/admin" element={<AdminRoute />}>
+          {/* <Route path="" element={<AdminDashboard />} /> */}
+          <Route element={<AdminLayout />}>
+    <Route index element={<AdminDashboard />} />
+          <Route path="create-category" element={<CreateCategory />} />
+          <Route path="category/:id" element={<UpdateCategory />} />
+          <Route path="create-product" element={<CreateProduct />} />
+          <Route path="product/:slug" element={<UpdateProducts />} />
+          <Route path="orders" element={<AdminOrderList />} />
+          <Route path="products" element={<CategoryProductList />} />
+
+          <Route path="categories" element={<AdminCategoryList />} />
+          <Route path="categories/new" element={<AdminCategoryForm />} />
+          <Route path="categories/:id/edit" element={<AdminCategoryForm />} />
+
+          <Route path="specifications" element={<AdminSpecificationList />} />
+          <Route path="specifications/new" element={<AdminSpecificationForm />} />
+          <Route path="specifications/:id/edit" element={<AdminSpecificationForm />} />
+</Route>
         </Route>
         <Route path="/oauth" >
           <Route path="success" element={<OauthSuccess />} />

@@ -130,7 +130,6 @@
     }
 }
 
-
 @keyframes gradientShift {
   0%, 100% {
     transform: translateX(-100%);

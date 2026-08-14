@@ -21,7 +21,7 @@ export const createCategorySchema = z.object({
       "Description contains invalid characters",
     )
     .optional(),
-  parentId: z.string().optional(),
+  parentId: z.number().optional(),
 });
 
 export const updateCategorySchema = createCategorySchema.extend({

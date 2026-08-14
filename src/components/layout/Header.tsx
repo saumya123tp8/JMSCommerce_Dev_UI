@@ -23,6 +23,13 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state)=>state.auth);
   console.log("auth in header", auth);
+  const isDashboardAdmin = auth?.user?.roles?.some((role: any) => 
+    ["ROLE_DEVELOPER", "ROLE_ADMIN"].includes(role.name)
+  )
+  console.log("auth in admin", isDashboardAdmin);
+  console.log("user in header", auth?.user);
+  console.log("role in header", auth?.user?.roles);
+  console.log("role in header", auth?.user?.roles.toString());
   const handleLogout = (): void => {
     // setAuth({
     //   ...auth,
@@ -35,6 +42,7 @@ const Header: React.FC = () => {
     toast.success("Logout Successfully");
   };
 
+  
   return (
     <nav className="fixed top-0 z-50 w-full border-b bg-white shadow-sm">
       <div className="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-4">
@@ -106,7 +114,7 @@ const Header: React.FC = () => {
               <div className="invisible absolute right-0 mt-2 w-48 rounded-md border bg-white py-1 normal-case shadow-md opacity-0 transition-all group-hover:visible group-hover:opacity-100">
                 <NavLink
                     // to={`/dashboard/`}
-                  to={`/dashboard/${auth?.user?.roles?.includes("ADMIN")? "admin" : "user"}`}
+                  to={`/dashboard/${isDashboardAdmin? "admin" : "user"}`}
                   className="block px-4 py-2 text-sm hover:bg-gray-100"
                 >
                   Dashboard
