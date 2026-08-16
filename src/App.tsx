@@ -17,7 +17,7 @@ import AdminDashboard from './pages/admin/AdminDashboard'
 import CreateCategory from './pages/admin/categories/CreateCategory'
 import CreateProduct from './pages/admin/CreateProduct'
 import UpdateProducts from './pages/admin/UpdateProducts'
-import AdminOrderList from './pages/admin/AdminOrderList'
+import AdminOrderList from './pages/admin/orders/AdminOrderList'
 import CategoryProductList from './pages/admin/CategoryProductList'
 import About from './pages/About'
 import Policy from './pages/Policy'
@@ -36,8 +36,10 @@ import AdminProductList from './pages/admin/products/AdminProductList'
 import AdminProductForm from './pages/admin/products/AdminProductForm'
 import AdminProductVariantList from './pages/admin/products/AdminProductVariantList'
 import AdminVariantForm from './pages/admin/products/AdminVariantForm'
+import AdminProductCustomizations from './pages/admin/products/AdminProductCustomizations'
 // import AdminVariantForm from './pages/admin/products/AdminVariant'
 // import { Card } from './components/ui/card'
+import AdminOrderRefundReview from './pages/admin/orders/AdminOrderRefundReview'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -82,6 +84,14 @@ function App() {
               <Route path="products/:productId/variants" element={<AdminProductVariantList />} />
               <Route path="products/:productId/variants/new" element={<AdminVariantForm />} />
               <Route path="products/:productId/variants/:variantId/edit" element={<AdminVariantForm />} />
+
+              <Route path="orders" element={<AdminOrderList />} />
+              <Route path="orders/:id/refund-review" element={<AdminOrderRefundReview />} />
+
+              <Route
+  path="products/:productId/customizations"
+  element={<AdminProductCustomizations />}
+/>
             </Route>
           </Route>
           <Route path="/oauth" >

@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plus, Pencil, Package } from "lucide-react";
+import { Plus, Pencil, Package, Settings2 } from "lucide-react";
 
 const AdminProductList: React.FC = () => {
   const { products, loading, error } = useProducts();
@@ -40,6 +40,7 @@ const AdminProductList: React.FC = () => {
               <TableHead>Price</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-center">Variants</TableHead>
+              <TableHead className="text-center">Define Customizations</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -84,28 +85,36 @@ const AdminProductList: React.FC = () => {
                         product.status === "ACTIVE"
                           ? "default"
                           : product.status === "DRAFT"
-                          ? "secondary"
-                          : "outline"
+                            ? "secondary"
+                            : "outline"
                       }
                     >
                       {product.status}
                     </Badge>
                   </TableCell>
                   <TableCell className="text-center">
-                  
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link to={`/dashboard/admin/products/${product.id}/variants`}>
-                          <Package className="mr-1 h-3 w-3" />
-                          Variants
-                        </Link>
-                      </Button>
-                      
-                    
+
+                    <Button variant="ghost" size="sm" >
+                      <Link to={`/dashboard/admin/products/${product.id}/variants`}>
+                        <Package className="mr-1 h-3 w-3" />
+                        Variants
+                      </Link>
+                    </Button>
+
+
+                  </TableCell>
+                  <TableCell className="text-center">
+                    <Button variant="ghost" size="sm" >
+                      <Link to={`/dashboard/admin/products/${product.id}/customizations`}>
+                        <Settings2 className="mr-1 h-3 w-3" />
+                        Customizations
+                      </Link>
+                    </Button>
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                     
-                      <Button variant="ghost" size="sm" asChild>
+
+                      <Button variant="ghost" size="sm" >
                         <Link to={`/dashboard/admin/products/${product.id}/edit`}>
                           <Pencil className="mr-1 h-3 w-3" />
                           Edit
