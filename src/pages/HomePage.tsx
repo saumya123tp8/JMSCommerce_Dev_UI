@@ -461,7 +461,6 @@
 
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { useHomeProducts } from "@/hooks/useHomeProducts";
 import { usePagedList } from "@/hooks/usePagedList";
@@ -470,7 +469,6 @@ import ProductCard from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
 
 const HomePage: React.FC = () => {
-  const navigate = useNavigate();
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const { products, loading, error } = useHomeProducts(activeCategoryId);
   const { visibleItems, hasMore, loadMore, reset } = usePagedList(products, 12);

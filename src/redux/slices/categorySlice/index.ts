@@ -6,7 +6,6 @@ import {
   editCategory,
 } from "../../thunks/categoryThunk"
 import type { Category } from "../../../types/category";
-import type { ApiResponse } from "../../../types/apiResponses";
 
 interface CategoryState {
   categories: Category[];

@@ -6,8 +6,8 @@ import Layout from "@/components/layout/Layout";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { createCategorySchema, parseParentId } from "@/schema/categorySchema";
-import type { CreateCategoryFormData } from "@/schema/categorySchema";
+import { createCategorySchema } from "@/schema/categorySchema";
+import type { CreateCategoryInput,CreateCategoryFormData } from "@/schema/categorySchema";
 import { createCategory } from "@/Service/CategoryServices";
 import { useCategories } from "@/hooks/useCategories";
 import { getParentOptions } from "@/lib/categoryUtils";
@@ -22,7 +22,7 @@ const CreateCategory = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<CreateCategoryFormData>({
+  } = useForm<CreateCategoryInput, unknown, CreateCategoryFormData>({
     resolver: zodResolver(createCategorySchema),
     defaultValues: {
       name: "",

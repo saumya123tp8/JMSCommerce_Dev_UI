@@ -6,7 +6,9 @@ export const specificationDataTypes = [
 "BOOLEAN" ,
 "DATE" ,
 "COLOR" ,
-"DECIMAL" 
+"DECIMAL" ,
+"ENUM" ,
+"COLOR" 
 ] as const;
 
 export const specificationSchema = z.object({

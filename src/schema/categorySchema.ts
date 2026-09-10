@@ -1,16 +1,36 @@
 import { z } from "zod";
 
 const categoryTextPattern = /^[a-zA-Z0-9&(),\-' ]+$/;
-const parentIdField = z.preprocess((val) => {
-  if (val === "" || val === "0" || val === null || val === undefined) {
-    return null;
-  }
-  if (typeof val === "string") {
-    const parsed = Number(val);
-    return Number.isNaN(parsed) ? val : parsed; // let Zod reject genuinely invalid strings
-  }
-  return val;
-}, z.number().nullable().optional());
+// const parentIdField = z.preprocess((val) => {
+//   if (val === "" || val === "0" || val === null || val === undefined) {
+//     return null;
+//   }
+//   if (typeof val === "string") {
+//     const parsed = Number(val);
+//     return Number.isNaN(parsed) ? val : parsed; // let Zod reject genuinely invalid strings
+//   }
+//   return val;
+// }, z.number().nullable().optional());
+const parentIdField = z
+  .union([z.string(), z.number(), z.null()])
+  .optional()
+  .transform((val, ctx) => {
+    if (val === "" || val === "0" || val === null || val === undefined) {
+      return null;
+    }
+    if (typeof val === "string") {
+      const parsed = Number(val);
+      if (Number.isNaN(parsed)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Invalid parent category",
+        });
+        return z.NEVER;
+      }
+      return parsed;
+    }
+    return val;
+  });
 export const createCategorySchema = z.object({
   name: z
     .string()
@@ -38,7 +58,11 @@ export const updateCategorySchema = createCategorySchema.extend({
 });
 
 export type CreateCategoryFormData = z.infer<typeof createCategorySchema>;
-export type UpdateCategoryFormData = z.infer<typeof updateCategorySchema>;
+export type CreateCategoryInput = z.input<typeof createCategorySchema>;
+// export type UpdateCategoryFormData = z.infer<typeof updateCategorySchema>;
+
+export type UpdateCategoryInput = z.input<typeof updateCategorySchema>;
+export type UpdateCategoryFormData = z.infer<typeof updateCategorySchema>; // (Output type)
 
 export function parseParentId(parentId?: string | null): number | null {
   if (!parentId) return null;

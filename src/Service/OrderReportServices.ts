@@ -1,7 +1,7 @@
 import ApiClient from "../Config/ApiCleint";
 import type { ApiResponse } from "../types/apiResponses";
 import type {
-  OrderReportSummary, OrderReportDetail, CreateReportPayload, AddReportMessagePayload, ReportMessage,OrderReportStatus,
+  OrderReportSummary, OrderReportDetail, CreateReportPayload, ReportMessage,OrderReportStatus,
   AddMessagePayload,AdminOrderReportSummary,UpdateStatusPayload,ResolveReportPayload
 } from "../types/orderReport";
 

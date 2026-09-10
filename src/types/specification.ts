@@ -1,7 +1,7 @@
 // NOTE: dataType enum values are inferred from the example payload
 // (NUMBER shown). Confirm the full enum list with backend before
 // relying on this — same caveat as CategoryStatus in your API doc.
-export type SpecificationDataType = "TEXT" | "NUMBER" | "BOOLEAN" | "ENUM" | "DATE";
+export type SpecificationDataType = "TEXT" | "NUMBER" | "BOOLEAN" | "ENUM" | "DATE" | "COLOR" | "DECIMAL";
 // TEXT confirmed from your real response. NUMBER/BOOLEAN/ENUM/DATE
 // still unconfirmed guesses — verify these against backend too if
 // you use non-text specs anywhere.

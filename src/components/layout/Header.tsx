@@ -7,16 +7,16 @@ import { useCategories } from "@/hooks/useCategories";
 // import { useCart } from "../../context/cart";
 // import { Badge } from "antd";
 import { Menu, X, ChevronDown } from "lucide-react";
-import type {AuthState} from "../../types/auth";
+// import type {AuthState} from "../../types/auth";
 import { useAppSelector,useAppDispatch } from "../../redux/hooks";
-import { loginThunk } from "../../redux/thunks/authThunks/loginThunk";
+// import { loginThunk } from "../../redux/thunks/authThunks/loginThunk";
 import { logout } from "../../redux/slices/authSlice";
 
 const Header: React.FC = () => {
   //   const [auth, setAuth] = useAuth();
   //   const [cart] = useCart();
   // const [auth, setAuth] = useState(true);
-  const [cart, setCart] = useState("");
+  // const [cart, setCart] = useState("");
   const { categories } = useCategories({ activeOnly: true });
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [categoriesOpen, setCategoriesOpen] = useState<boolean>(false);

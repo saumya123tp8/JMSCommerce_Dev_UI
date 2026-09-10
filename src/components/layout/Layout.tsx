@@ -16,10 +16,10 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({
   children,
-  title = "jms-ecommerce",
-  description = "name of maximum project",
-  keywords = "online,shop,product",
-  author = "tony",
+  // title = "jms-ecommerce",
+  // description = "name of maximum project",
+  // keywords = "online,shop,product",
+  // author = "tony",
 }) => {
   // return (
   //   <div>

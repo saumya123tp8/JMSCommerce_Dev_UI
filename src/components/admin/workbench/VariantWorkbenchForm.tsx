@@ -37,7 +37,7 @@ const VariantWorkbenchForm: React.FC<Props> = ({ productId, variantId, onSaved, 
     defaultValues: emptyValues,
   });
 
-  const loadForVariant = async (details: ProductDetails) => {
+  const loadForVariant = async (_details: ProductDetails) => {
     if (isEdit && variantId) {
       const variant = await getVariant(productId, variantId);
       form.reset({

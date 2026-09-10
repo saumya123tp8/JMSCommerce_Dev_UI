@@ -8,8 +8,8 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { updateCategorySchema, parseParentId } from "@/schema/categorySchema";
-import type { UpdateCategoryFormData } from "@/schema/categorySchema";
+import { updateCategorySchema } from "@/schema/categorySchema";
+import type { UpdateCategoryInput,UpdateCategoryFormData } from "@/schema/categorySchema";
 import {
   getCategoryById,
   updateCategory,
@@ -34,7 +34,8 @@ const UpdateCategory = () => {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<UpdateCategoryFormData>({
+  // } = useForm<UpdateCategoryFormData>({
+  } = useForm<UpdateCategoryInput, unknown, UpdateCategoryFormData>({
     resolver: zodResolver(updateCategorySchema),
   });
 

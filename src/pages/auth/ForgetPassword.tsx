@@ -1,8 +1,8 @@
 import React, { useState, type FormEvent } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import {  Link } from 'react-router-dom';
+// import axios from 'axios';
 import toast from 'react-hot-toast';
-import Layout from '../../components/Layout/Layout';
+import Layout from '@/components/layout/Layout';
 // import { ApiAuthResponse } from '../../types/auth.types';
 
 const ForgotPassword: React.FC = () => {
@@ -11,7 +11,7 @@ const ForgotPassword: React.FC = () => {
   const [newPassword, setNewPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

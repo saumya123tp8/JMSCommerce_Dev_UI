@@ -150,7 +150,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plus, Pencil, ListTree, ListChecks, ChevronRight } from "lucide-react";
+import {  Pencil, ListTree, ListChecks, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const AdminCategoryList: React.FC = () => {

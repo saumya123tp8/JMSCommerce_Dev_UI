@@ -13,7 +13,9 @@ import { getDescendantIds, sortCategoryTree } from "@/lib/categoryUtils";
 import {
   createCategorySchema,
   updateCategorySchema,
-  parseParentId,
+  // parseParentId,
+  type CreateCategoryInput,
+  type UpdateCategoryInput,
   type CreateCategoryFormData,
   type UpdateCategoryFormData,
 } from "@/schema/categorySchema";
@@ -52,17 +54,29 @@ const AdminCategoryForm: React.FC = () => {
   // Check if parentId is passed via URL query params
   const urlParentId = searchParams.get("parentId");
   const isParentDisabled = Boolean(urlParentId);
-  const form = useForm<CreateCategoryFormData | UpdateCategoryFormData>({
-    resolver: zodResolver(isEdit ? updateCategorySchema : createCategorySchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      parentId: searchParams.get("parentId")
-        ? (searchParams.get("parentId"))
-        : "",
-      ...(isEdit ? { status: "ACTIVE" as const } : {}),
-    },
-  });
+  // const form = useForm<CreateCategoryFormData | UpdateCategoryFormData>({
+  //   resolver: zodResolver(isEdit ? updateCategorySchema : createCategorySchema),
+  //   defaultValues: {
+  //     name: "",
+  //     description: "",
+  //     parentId: searchParams.get("parentId")
+  //       ? (searchParams.get("parentId"))
+  //       : "",
+  //     ...(isEdit ? { status: "ACTIVE" as const } : {}),
+  //   },
+  // });
+  const form = useForm<CreateCategoryInput | UpdateCategoryInput,   // TFieldValues (pre-validation, matches z.input)
+  any,                                          // TContext
+  CreateCategoryFormData | UpdateCategoryFormData // TTransformedValues (post-validation, matches z.infer)
+>({
+  resolver: zodResolver(isEdit ? updateCategorySchema : createCategorySchema),
+  defaultValues: {
+    name: "",
+    description: "",
+    parentId: searchParams.get("parentId") ? searchParams.get("parentId") : "",
+    ...(isEdit ? { status: "ACTIVE" as const } : {}),
+  },
+});
 
   useEffect(() => {
     if (!isEdit || !id) return;
@@ -101,7 +115,7 @@ const AdminCategoryForm: React.FC = () => {
     try {
       const payload = {
         ...values,
-        parentId: parseParentId(values.parentId)
+        parentId: (values.parentId)
       }
       if (isEdit && id) {
         await updateCategory(Number(id), payload as UpdateCategoryRequest);

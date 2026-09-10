@@ -31,7 +31,7 @@ const Register: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setError,
+    // setError,
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),

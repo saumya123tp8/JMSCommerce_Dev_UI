@@ -1,13 +1,13 @@
-import React,{useState} from "react";
+import React from "react";
 // import { useSearch } from "../../context/search";
-import axios from "axios";
-import { useNavigate } from "react-router";
+// import axios from "axios";
+// import { useNavigate } from "react-router";
 
 const SearchInput: React.FC = () => {
 //   const [values, setValues] = useSearch();
-  const [values, setValues] = useState("");
+  // const [values, setValues] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();

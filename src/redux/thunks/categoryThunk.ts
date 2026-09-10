@@ -12,7 +12,6 @@ import type {
   UpdateCategoryRequest,
 } from "../../types/category";
 import type { ApiErrorResponse } from "../../types/apiResponses";
-import { ApiResponse } from "@/types/auth";
 
 const extractErrorMessage = (error: unknown): string => {
   const axiosError = error as AxiosError<ApiErrorResponse>;
@@ -35,7 +34,7 @@ export const fetchAllCategories = createAsyncThunk
 
 export const fetchCategoryById = createAsyncThunk
   
-("category/fetchById", async (id, { rejectWithValue }) => {
+("category/fetchById", async (id:number, { rejectWithValue }) => {
   try {
     return await getCategoryById(id);
   } catch (error) {

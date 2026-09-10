@@ -75,7 +75,8 @@ const ReviewForm: React.FC<Props> = ({ productId, onSubmitted }) => {
       <p className="text-sm font-medium text-[#2E1F14]">Write a Review</p>
 
       {eligibleItems.length > 1 && (
-        <Select value={selectedOrderItemKey} onValueChange={setSelectedOrderItemKey}>
+        // <Select value={selectedOrderItemKey} onValueChange={setSelectedOrderItemKey}>
+        <Select value={selectedOrderItemKey} onValueChange={(value) => setSelectedOrderItemKey(value || "")}>
           <SelectTrigger>
             <SelectValue placeholder="Which order is this review for?" />
           </SelectTrigger>

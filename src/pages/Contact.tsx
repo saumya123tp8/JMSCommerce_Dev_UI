@@ -18,7 +18,6 @@ import { contactSchema } from "@/schema/ContactSchema";
 
 import type { ContactFormData } from "@/types/contact";
 
-import toast from "react-hot-toast";
 
 import Layout from "@/components/layout/Layout";
 
@@ -28,24 +27,24 @@ const Contact = () => {
   const {
     register,
 
-    handleSubmit,
+    // handleSubmit,
 
     formState: { errors, isSubmitting },
 
-    reset,
+    // reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
 
     mode: "onTouched",
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    console.log(data);
+  // const onSubmit = async (data: ContactFormData) => {
+  //   console.log(data);
 
-    toast.success("Message sent successfully.");
+  //   toast.success("Message sent successfully.");
 
-    reset();
-  };
+  //   reset();
+  // };
   return (
     <Layout title="Contact Us">
       <section className="bg-[#2E1F14]">

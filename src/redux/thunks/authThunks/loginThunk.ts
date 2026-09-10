@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { loginUser } from "../../../Service/AuthServices";
-import type { ApiErrorResponse, LoginFormData } from "../../../types/auth";
+import type {  LoginFormData } from "../../../types/auth";
 export const loginThunk =
 createAsyncThunk(
 

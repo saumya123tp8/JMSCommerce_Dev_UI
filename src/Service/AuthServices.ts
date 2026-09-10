@@ -1,5 +1,5 @@
-import axios from 'axios';
-import type {  RegisterFormData, LoginFormData, LoginResponse, ApiResponse, ApiErrorResponse } from '../types/auth';
+
+import type {  RegisterFormData, LoginFormData, LoginResponse, ApiResponse } from '../types/auth';
 import apiClient from '../Config/ApiCleint';
 import apiRefreshClient from '@/Config/ApiRefreshClient';
 

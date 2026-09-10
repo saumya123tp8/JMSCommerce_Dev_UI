@@ -1,11 +1,11 @@
 
 import { Link } from "react-router-dom";
 import { buttonVariants } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { useOrders } from "@/hooks/useOrders";
 import { useAdminOrderReports } from "@/hooks/useAdminOrderReports";
 import { computeDashboardStats } from "@/lib/dashboardStats";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import { IndianRupee, Package, Clock, MessageSquare } from "lucide-react";
 
 const StatCard: React.FC<{ icon: React.ElementType; label: string; value: string }> = ({

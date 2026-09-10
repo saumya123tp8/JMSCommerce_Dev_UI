@@ -2,10 +2,12 @@ import {configureStore} from '@reduxjs/toolkit';
 import counterSlice from './slices/counterSlice';
 import authReducer from './slices/authSlice';
 import { setupInterceptors, setupResponseInterceptors } from '@/Config/ApiCleint';
+import categoryReducer from './slices/categorySlice';
 const store = configureStore({
     reducer: {
         counter: counterSlice,
-        auth:authReducer
+        auth:authReducer,
+        categorySlice: categoryReducer,
     }
 })
 
