@@ -21,22 +21,35 @@ const Layout: React.FC<LayoutProps> = ({
   keywords = "online,shop,product",
   author = "tony",
 }) => {
+  // return (
+  //   <div>
+  //     {/* <Helmet>
+  //       <meta charSet="utf-8" />
+  //       <meta name="description" content={description} />
+  //       <meta name="keywords" content={keywords} />
+  //       <meta name="author" content={author} />
+  //       <title>{title}</title>
+  //     </Helmet> */}
+  //     <Header />
+  //     <main style={{ minHeight: "70vh" }} className="pt-16 md:pt-20">
+  //       <Toaster />
+  //       {children}
+  //     </main>
+  //     {/* <FloatingCartButton /> */}
+  //     {/* <FloatingHomeButton /> */}
+  //     <Footer />
+  //   </div>
+  // );
+
   return (
-    <div>
-      {/* <Helmet>
-        <meta charSet="utf-8" />
-        <meta name="description" content={description} />
-        <meta name="keywords" content={keywords} />
-        <meta name="author" content={author} />
-        <title>{title}</title>
-      </Helmet> */}
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main style={{ minHeight: "70vh" }} className="pt-16 md:pt-20">
+  
+      <main className="flex-1 pt-16 md:pt-20">
         <Toaster />
         {children}
       </main>
-      {/* <FloatingCartButton /> */}
-      {/* <FloatingHomeButton /> */}
+  
       <Footer />
     </div>
   );

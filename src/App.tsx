@@ -4,13 +4,13 @@ import HomePage from './pages/HomePage'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import ForgotPassword from './pages/auth/ForgetPassword'
-import ProductDetails from './pages/ProductDetails'
+import ProductDetailPage from './pages/ProductDetailPage'
 import Categories from './pages/Categories'
 import CartPage from './pages/CartPage'
 import Search from './pages/Search'
 import CategoryPage from './pages/CategoryPage'
 import UpdateCategory from './pages/admin/categories/UpdateCategory'
-import Dashboard from './pages/user/Dashboard'
+import UserDashboard from './pages/user/UserDashboard'
 import Orders from './pages/user/Orders'
 import Profile from './pages/user/Profile'
 import AdminDashboard from './pages/admin/AdminDashboard'
@@ -37,9 +37,16 @@ import AdminProductForm from './pages/admin/products/AdminProductForm'
 import AdminProductVariantList from './pages/admin/products/AdminProductVariantList'
 import AdminVariantForm from './pages/admin/products/AdminVariantForm'
 import AdminProductCustomizations from './pages/admin/products/AdminProductCustomizations'
+import OrderStatusResultPage from './pages/OrderStatusResultPage'
+import AdminProductWorkbench from './pages/admin/products/AdminProductWorkbench'
 // import AdminVariantForm from './pages/admin/products/AdminVariant'
 // import { Card } from './components/ui/card'
 import AdminOrderRefundReview from './pages/admin/orders/AdminOrderRefundReview'
+import OrderDetailPage from './pages/user/OrderDetailPage'
+import ReportDetailPage from './pages/user/ReportDetailPage'
+
+import AdminOrderReportDetail from './pages/admin/reports/AdminOrderReportDetail'
+import AdminOrderReportList from './pages/admin/reports/AdminOrderReportList'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -49,13 +56,19 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/product/:slug" element={<ProductDetails />} />
+          {/* <Route path="/product/:slug" element={<ProductDetails />} /> */}
+          <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/cart" element={<CartPage />} />
           <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/order/:id/success" element={<OrderStatusResultPage variant="success" />} />
+          <Route path="/order/:id/payment-failed" element={<OrderStatusResultPage variant="failed" />} />
+          <Route path="/dashboard/user/orders/:id" element={<OrderDetailPage />} />
+          <Route path="/dashboard/user/reports/:id" element={<ReportDetailPage />} />
           <Route path="/search" element={<Search />} />
+          
           <Route path="/dashboard" element={<PrivateRoute />}>
-            <Route path="user" element={<Dashboard />} />
+            <Route path="user" element={<UserDashboard />} />
             <Route path="user/orders" element={<Orders />} />
             <Route path="user/profile" element={<Profile />} />
           </Route>
@@ -78,20 +91,24 @@ function App() {
               <Route path="specifications/new" element={<AdminSpecificationForm />} />
               <Route path="specifications/:id/edit" element={<AdminSpecificationForm />} />
 
-              <Route path="products" element={<AdminProductList />} />
-              <Route path="products/new" element={<AdminProductForm />} />
+              {/* <Route path="products" element={<AdminProductList />} /> */}
+              {/* <Route path="products/new" element={<AdminProductForm />} />
               <Route path="products/:id/edit" element={<AdminProductForm />} />
               <Route path="products/:productId/variants" element={<AdminProductVariantList />} />
               <Route path="products/:productId/variants/new" element={<AdminVariantForm />} />
-              <Route path="products/:productId/variants/:variantId/edit" element={<AdminVariantForm />} />
+              <Route path="products/:productId/variants/:variantId/edit" element={<AdminVariantForm />} /> */}
+
+              <Route path="products" element={<AdminProductWorkbench />} />
 
               <Route path="orders" element={<AdminOrderList />} />
               <Route path="orders/:id/refund-review" element={<AdminOrderRefundReview />} />
 
               <Route
-  path="products/:productId/customizations"
-  element={<AdminProductCustomizations />}
-/>
+                path="products/:productId/customizations"
+                element={<AdminProductCustomizations />}
+              />
+              <Route path="reports" element={<AdminOrderReportList />} />
+              <Route path="reports/:id" element={<AdminOrderReportDetail />} />
             </Route>
           </Route>
           <Route path="/oauth" >

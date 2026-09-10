@@ -52,7 +52,7 @@ const UpdateCategory = () => {
         reset({
           name: data.name,
           description: data.description ?? "",
-          parentId: data.parentId != null ? String(data.parentId) : "",
+          parentId: data.parentId != null ? (data.parentId) : null,
           status: data.status,
         });
       } catch {
@@ -73,7 +73,7 @@ const UpdateCategory = () => {
       await updateCategory(categoryId, {
         name: data.name,
         description: data.description || undefined,
-        parentId: parseParentId(data.parentId),
+        parentId: (data.parentId),
         status: data.status,
       });
       toast.success("Category updated successfully");
@@ -153,12 +153,15 @@ const UpdateCategory = () => {
               <label htmlFor="parentId" className="mb-2 block text-sm font-medium">
                 Parent category
               </label>
+              // UpdateCategory.tsx — same idea, but defaultValue should reflect
+              // the loaded category's actual parentId once available
               <select
                 id="parentId"
+                defaultValue={category?.parentId != null ? String(category.parentId) : "0"}
                 className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                 {...register("parentId")}
               >
-                <option value="">None (root category)</option>
+                <option value="0">None (root category)</option>
                 {parentOptions.map((item) => (
                   <option key={item.id} value={item.id}>
                     {"—".repeat(Math.max(item.level - 1, 0))} {item.name}

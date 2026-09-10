@@ -1,7 +1,16 @@
 import { z } from "zod";
 
 const categoryTextPattern = /^[a-zA-Z0-9&(),\-' ]+$/;
-
+const parentIdField = z.preprocess((val) => {
+  if (val === "" || val === "0" || val === null || val === undefined) {
+    return null;
+  }
+  if (typeof val === "string") {
+    const parsed = Number(val);
+    return Number.isNaN(parsed) ? val : parsed; // let Zod reject genuinely invalid strings
+  }
+  return val;
+}, z.number().nullable().optional());
 export const createCategorySchema = z.object({
   name: z
     .string()
@@ -21,7 +30,7 @@ export const createCategorySchema = z.object({
       "Description contains invalid characters",
     )
     .optional(),
-  parentId: z.number().optional(),
+    parentId: parentIdField,
 });
 
 export const updateCategorySchema = createCategorySchema.extend({
@@ -31,7 +40,7 @@ export const updateCategorySchema = createCategorySchema.extend({
 export type CreateCategoryFormData = z.infer<typeof createCategorySchema>;
 export type UpdateCategoryFormData = z.infer<typeof updateCategorySchema>;
 
-export function parseParentId(parentId?: string): number | null {
+export function parseParentId(parentId?: string | null): number | null {
   if (!parentId) return null;
   const parsed = Number(parentId);
   return Number.isNaN(parsed) ? null : parsed;

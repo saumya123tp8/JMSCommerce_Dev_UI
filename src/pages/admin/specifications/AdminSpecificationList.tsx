@@ -50,7 +50,7 @@ const AdminSpecificationList: React.FC = () => {
     <div className="p-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Specifications</h1>
-        <Button asChild>
+        <Button >
           <Link to="/dashboard/admin/specifications/new">
             <Plus className="mr-2 h-4 w-4" />
             New Specification
@@ -122,7 +122,7 @@ const AdminSpecificationList: React.FC = () => {
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                      <Button variant="ghost" size="sm" asChild>
+                      <Button variant="ghost" size="sm" >
                         <Link to={`/dashboard/admin/specifications/${spec.id}/edit`}>
                           <Pencil className="mr-1 h-3 w-3" />
                           Edit

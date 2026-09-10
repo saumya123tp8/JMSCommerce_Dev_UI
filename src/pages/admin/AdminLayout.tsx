@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, FolderTree, ListChecks, Plus, Package, ShoppingBag } from "lucide-react";
+import { LayoutDashboard, FolderTree, ListChecks, Plus, Package, ShoppingBag,MessageSquare } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 interface NavItem {
@@ -44,6 +44,11 @@ const navItems: NavItem[] = [
   icon: ShoppingBag, // import { ShoppingBag } from "lucide-react"
   matchPrefix: "/dashboard/admin/orders",
 },
+{ label: "Reports", 
+  to: "/dashboard/admin/reports", 
+  icon: MessageSquare, 
+  matchPrefix: "/dashboard/admin/reports" 
+},
 ];
 
 const AdminLayout: React.FC = () => {
@@ -75,7 +80,11 @@ const AdminLayout: React.FC = () => {
                   (item.matchPrefix === "/dashboard/admin/product" &&
                     location.pathname.startsWith("/dashboard/admin/products"))||
                     (item.matchPrefix === "/dashboard/admin/orders" &&
-                      location.pathname.startsWith("/dashboard/admin/orders"));
+                      location.pathname.startsWith("/dashboard/admin/orders"))||
+                      (item.matchPrefix === "/dashboard/admin/reports" &&
+                        location.pathname.startsWith("/dashboard/admin/reports"));
+
+                    
 
               const Icon = item.icon;
 

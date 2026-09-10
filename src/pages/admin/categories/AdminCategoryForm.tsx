@@ -13,6 +13,7 @@ import { getDescendantIds, sortCategoryTree } from "@/lib/categoryUtils";
 import {
   createCategorySchema,
   updateCategorySchema,
+  parseParentId,
   type CreateCategoryFormData,
   type UpdateCategoryFormData,
 } from "@/schema/categorySchema";
@@ -37,6 +38,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Layout from "@/components/layout/Layout"
+import type { CreateCategoryRequest, UpdateCategoryRequest } from "@/types/category";
 
 const AdminCategoryForm: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -56,8 +58,8 @@ const AdminCategoryForm: React.FC = () => {
       name: "",
       description: "",
       parentId: searchParams.get("parentId")
-        ? Number(searchParams.get("parentId"))
-        : -1,
+        ? (searchParams.get("parentId"))
+        : "",
       ...(isEdit ? { status: "ACTIVE" as const } : {}),
     },
   });
@@ -70,7 +72,7 @@ const AdminCategoryForm: React.FC = () => {
         form.reset({
           name: category.name,
           description: category.description ?? "",
-          parentId: category.parentId ? Number(category.parentId) : -1,
+          parentId: category.parentId ? String(category.parentId) : "",
           status: category.status,
         });
       } catch {
@@ -97,11 +99,15 @@ const AdminCategoryForm: React.FC = () => {
   ) => {
     setSubmitting(true);
     try {
+      const payload = {
+        ...values,
+        parentId: parseParentId(values.parentId)
+      }
       if (isEdit && id) {
-        await updateCategory(Number(id), values as UpdateCategoryFormData);
+        await updateCategory(Number(id), payload as UpdateCategoryRequest);
         toast.success("Category updated");
       } else {
-        await createCategory(values as CreateCategoryFormData);
+        await createCategory(payload as CreateCategoryRequest);
         toast.success("Category created");
       }
       await refetchCategories();
@@ -212,7 +218,7 @@ const AdminCategoryForm: React.FC = () => {
                         field.onChange(val === "none" ? undefined : Number(val))
                       }
                       value={
-                        field.value && field.value !== -1
+                        field.value && field.value !== null
                           ? String(field.value)
                           : "none"
                       }

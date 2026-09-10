@@ -1,7 +1,9 @@
 export const extractApiErrorMessage = (err:any)=>{
+    console.log("error print")
+    console.log(err)
     const message =
-    err?.response?.data?.message ??
-    err?.response?.data?.error ??
-    "Something went wrong";
+    err?.message && err?.error
+      ? `${err.message} : ${err.error}`
+      : err?.message || err?.error || "Something went wrong";
     return message;
 }

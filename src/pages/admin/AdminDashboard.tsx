@@ -1,134 +1,67 @@
+
 import { Link } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useCategories } from "@/hooks/useCategories";
-import { sortCategoryTree } from "@/lib/categoryUtils";
+import { useOrders } from "@/hooks/useOrders";
+import { useAdminOrderReports } from "@/hooks/useAdminOrderReports";
+import { computeDashboardStats } from "@/lib/dashboardStats";
 import { cn } from "@/lib/utils";
+import { IndianRupee, Package, Clock, MessageSquare } from "lucide-react";
+
+const StatCard: React.FC<{ icon: React.ElementType; label: string; value: string }> = ({
+  icon: Icon, label, value,
+}) => (
+  <div className="rounded-2xl border border-[#E8DDD0] bg-white p-5">
+    <div className="mb-2 flex items-center gap-2 text-muted-foreground">
+      <Icon className="h-4 w-4" />
+      <span className="text-xs uppercase tracking-wide">{label}</span>
+    </div>
+    <p className="font-serif text-2xl text-[#2E1F14]">{value}</p>
+  </div>
+);
 
 const AdminDashboard = () => {
-  const { categories, loading, error, refetch } = useCategories();
-  const sortedCategories = sortCategoryTree(categories);
+  
+  const { orders, loading: ordersLoading } = useOrders();
+  const { reports, loading: reportsLoading } = useAdminOrderReports("ALL");
+
+
+  const stats = computeDashboardStats(orders, reports);
+  const statsLoading = ordersLoading || reportsLoading;
 
   return (
-    // <Layout title="Admin Dashboard">
-      <section className="container mx-auto px-4 py-10">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#C9A96E]">
-              Admin
-            </p>
-            <h1 className="font-serif text-3xl text-[#2E1F14]">Dashboard</h1>
-          </div>
-          <div className="flex gap-3">
-            <Link
-              to="/dashboard/admin/specifications"
-              className={buttonVariants({ variant: "outline" })}
-            >
-              Manage Specifications
-            </Link>
-            <Link
-              to="/dashboard/admin/create-category"
-              className={buttonVariants()}
-            >
-              Create category
-            </Link>
-          </div>
-        </div>
+    <section className="p-6">
+      <div className="mb-8">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.35em] text-[#C9A96E]">Admin</p>
+        <h1 className="font-serif text-3xl text-[#2E1F14]">Dashboard</h1>
+      </div>
 
-        <div className="rounded-2xl border border-[#E8DDD0] bg-white p-6 shadow-sm">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <h2 className="text-lg font-semibold text-[#2E1F14]">Categories</h2>
-            <Button variant="outline" size="sm" onClick={() => refetch()}>
-              Refresh
-            </Button>
-          </div>
+      {/* Stat cards */}
+      <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
+        {statsLoading ? (
+          <p className="col-span-4 text-sm text-muted-foreground">Loading stats...</p>
+        ) : (
+          <>
+            <StatCard icon={IndianRupee} label="Revenue (paid orders)" value={`₹${stats.totalRevenue.toFixed(0)}`} />
+            <StatCard icon={Package} label="Total Orders" value={String(stats.totalOrders)} />
+            <StatCard icon={Clock} label="Active Orders" value={String(stats.activeOrders)} />
+            <StatCard icon={MessageSquare} label="Open Reports" value={String(stats.openReports)} />
+          </>
+        )}
+      </div>
 
-          {loading && (
-            <p className="text-sm text-muted-foreground">Loading categories...</p>
-          )}
+      <div className="mb-8 flex flex-wrap gap-3">
+        <Link to="/dashboard/admin/reports" className={buttonVariants({ variant: "outline" })}>
+          View Order Reports
+        </Link>
+        <Link to="/dashboard/admin/orders" className={buttonVariants({ variant: "outline" })}>
+          View Orders
+        </Link>
+      
+      </div>
 
-          {error && (
-            <p className="text-sm text-destructive">{error}</p>
-          )}
-
-          {!loading && !error && sortedCategories.length === 0 && (
-            <p className="text-sm text-muted-foreground">
-              No categories yet. Create your first category to get started.
-            </p>
-          )}
-
-          {!loading && sortedCategories.length > 0 && (
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[640px] text-left text-sm">
-                <thead>
-                  <tr className="border-b border-[#E8DDD0] text-muted-foreground">
-                    <th className="px-3 py-3 font-medium">Name</th>
-                    <th className="px-3 py-3 font-medium">Slug</th>
-                    <th className="px-3 py-3 font-medium">Level</th>
-                    <th className="px-3 py-3 font-medium">Status</th>
-                    <th className="px-3 py-3 font-medium">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedCategories.map((category) => (
-                    <tr
-                      key={category.id}
-                      className="border-b border-[#E8DDD0]/70 last:border-b-0"
-                    >
-                      <td className="px-3 py-3">
-                        <span
-                          style={{ paddingLeft: `${(category.level - 1) * 16}px` }}
-                          className="inline-block"
-                        >
-                          {category.level > 1 && "— "}
-                          {category.name}
-                        </span>
-                      </td>
-                      <td className="px-3 py-3 text-muted-foreground">
-                        {category.slug}
-                      </td>
-                      <td className="px-3 py-3">{category.level}</td>
-                      <td className="px-3 py-3">
-                        <Badge
-                          variant={
-                            category.status === "ACTIVE" ? "default" : "secondary"
-                          }
-                        >
-                          {category.status}
-                        </Badge>
-                      </td>
-                      <td className="px-3 py-3">
-                        <div className="flex items-center gap-3">
-                          <Link
-                            to={`/dashboard/admin/create-category?parentId=${category.id}`}
-                            className={cn(
-                              buttonVariants({ variant: "link" }),
-                              "h-auto p-0",
-                            )}
-                          >
-                            Add sub
-                          </Link>
-                          <Link
-                            to={`/dashboard/admin/category/${category.id}`}
-                            className={cn(
-                              buttonVariants({ variant: "link" }),
-                              "h-auto p-0",
-                            )}
-                          >
-                            Edit
-                          </Link>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      </section>
-    // </Layout>
+    
+    </section>
   );
 };
 

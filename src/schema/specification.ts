@@ -1,11 +1,12 @@
 import { z } from "zod";
 
 export const specificationDataTypes = [
-  "STRING",
-  "NUMBER",
-  "BOOLEAN",
-  "ENUM",
-  "DATE",
+  "TEXT" ,
+"NUMBER" ,
+"BOOLEAN" ,
+"DATE" ,
+"COLOR" ,
+"DECIMAL" 
 ] as const;
 
 export const specificationSchema = z.object({

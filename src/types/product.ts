@@ -20,8 +20,8 @@ export interface Product {
 }
 
 export interface ProductDetails extends Product {
-  category: { id: number; name: string; slug: string };
-  brand: { id: number; name: string };
+  category: { id: number; name: string; slug: string }; // slug unconfirmed inside this nested object — kept from Category's own shape as best guess
+  brand: { id: number; name: string; logo: string | null }; // now grounded in real Brand fields
   description: string;
   ratingCount: number;
   reviewCount: number;

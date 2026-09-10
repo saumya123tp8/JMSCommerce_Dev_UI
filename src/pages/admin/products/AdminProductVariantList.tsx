@@ -106,7 +106,7 @@ const AdminProductVariantList: React.FC = () => {
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
-                      <Button variant="ghost" size="sm" asChild>
+                      <Button variant="ghost" size="sm">
                         <Link
                           to={`/dashboard/admin/products/${productId}/variants/${variant.id}/edit`}
                         >

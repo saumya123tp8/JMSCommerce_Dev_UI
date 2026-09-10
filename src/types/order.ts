@@ -15,6 +15,7 @@ export interface OrderItemCustomization {
 }
 
 export interface OrderItem {
+  orderItemId:number;
   productId: number;
   variantId: number;
   productName: string;
@@ -41,7 +42,7 @@ export interface OrderDeliveryAddress {
   state: string;
   country: string;
   pincode: string;
-  type: "HOME" | "WORK" | "OTHER"; // per Address doc's unconfirmed enum
+  type: "HOME" | "OFFICE" | "OTHER"; // per Address doc's unconfirmed enum
   deliveryInstructions: string | null;
 }
 
@@ -63,4 +64,11 @@ export interface Order {
   deliveryCharge: number;
   grandTotal: number;
   orderItems: OrderItem[];
+}
+
+export type PaymentMethod = "RAZORPAY" | "COD";
+
+export interface CreateOrderPayload {
+  addressId: number;
+  paymentMethod: PaymentMethod;
 }

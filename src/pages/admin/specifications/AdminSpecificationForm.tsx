@@ -52,7 +52,7 @@ const AdminSpecificationForm: React.FC = () => {
       name: "",
       displayName: "",
       description: "",
-      dataType: "STRING",
+      dataType: "TEXT",
       unit: "",
       required: false,
       filterable: false,

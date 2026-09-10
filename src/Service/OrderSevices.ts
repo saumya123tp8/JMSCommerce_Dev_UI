@@ -1,6 +1,8 @@
 import ApiClient from "../Config/ApiCleint";
 import type { ApiResponse } from "../types/apiResponses";
-import type { Order, OrderStatus } from "../types/order";
+import type { Order, OrderStatus,CreateOrderPayload } from "../types/order";
+
+
 
 const BASE = "/order";
 
@@ -62,3 +64,13 @@ export const decideOrderRefund = async (
   );
   return data.data;
 };
+
+
+
+export const createOrder = async (payload:CreateOrderPayload): Promise<Order> =>{
+  const { data } = await ApiClient.post<ApiResponse<Order>>(
+    `${BASE}`,
+    payload
+  );
+  return data.data;
+}

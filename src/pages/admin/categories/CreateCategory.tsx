@@ -27,7 +27,7 @@ const CreateCategory = () => {
     defaultValues: {
       name: "",
       description: "",
-      parentId: "",
+      parentId: 0
     },
   });
 
@@ -36,13 +36,16 @@ const CreateCategory = () => {
       const created = await createCategory({
         name: data.name,
         description: data.description || undefined,
-        parentId: parseParentId(data.parentId),
+        parentId: data.parentId === 0 ? null : data.parentId,
       });
+
       toast.success("Category created successfully");
       navigate(`/dashboard/admin/category/${created.id}`);
     } catch (err: unknown) {
       const message =
-        (err as { message?: string })?.message ?? "Failed to create category";
+        (err as { message?: string })?.message ??
+        "Failed to create category";
+
       toast.error(message);
     }
   };
@@ -92,12 +95,14 @@ const CreateCategory = () => {
             <label htmlFor="parentId" className="mb-2 block text-sm font-medium">
               Parent category
             </label>
+            // CreateCategory.tsx
             <select
               id="parentId"
+              defaultValue="0"
               className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
               {...register("parentId")}
             >
-              <option value="">None (root category)</option>
+              <option value="0">None (root category)</option>
               {parentOptions.map((category) => (
                 <option key={category.id} value={category.id}>
                   {"—".repeat(Math.max(category.level - 1, 0))} {category.name}

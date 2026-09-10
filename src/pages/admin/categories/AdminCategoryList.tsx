@@ -225,12 +225,13 @@ const AdminCategoryList: React.FC = () => {
             </Link>
           </TableCell>
           <TableCell className="text-center">
+            {(category.level != 4)&&(
             <Button variant="ghost" size="sm" >
               <Link to={`/dashboard/admin/categories/new?parentId=${category.id}`}>
                 <ListTree className="mr-1 h-3 w-3" />
-                Add
+                Add..
               </Link>
-            </Button>
+            </Button>)}
           </TableCell>
           <TableCell className="text-right">
             <Button variant="ghost" size="sm" >

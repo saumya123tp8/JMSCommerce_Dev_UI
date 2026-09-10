@@ -1,7 +1,9 @@
-import type { Specification } from "@/types/specification";
+import type { Specification,DefinitionType } from "@/types/specification";
 import type { Category } from "@/types/category";
 // Client-side filter — see note below on the missing
 // GET /api/v1/specifications/category/{categoryId} endpoint.
+export const getActiveCategories = (categories: Category[]): Category[] =>
+  categories.filter((c) => c.status === "ACTIVE");
 export const getSpecificationsByCategory = (
   specifications: Specification[],
   categoryId: number
@@ -36,3 +38,11 @@ export const getInheritedSpecifications = (
     .filter((s) => chain.includes(s.categoryId))
     .sort((a, b) => a.displayOrder - b.displayOrder);
 };
+
+// FIXED: was checking s.specificationScope (field doesn't exist on
+// real API responses), now checks s.definitionType, matching the
+// confirmed backend field.
+export const filterByScope = (
+  specs: Specification[],
+  scope: DefinitionType
+): Specification[] => specs.filter((s) => s.definitionType === scope);
