@@ -47,6 +47,8 @@ import ReportDetailPage from './pages/user/ReportDetailPage'
 
 import AdminOrderReportDetail from './pages/admin/reports/AdminOrderReportDetail'
 import AdminOrderReportList from './pages/admin/reports/AdminOrderReportList'
+import TermsAndConditions from './pages/TermsAndConditions'
+import ShippingInfo from './pages/ShippingInfo'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -121,6 +123,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/shipping" element={<ShippingInfo />} />
 
           {/* if any routes not work */}
           <Route path="*" element={<PageNotFound />} />

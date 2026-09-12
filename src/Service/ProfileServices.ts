@@ -2,7 +2,7 @@ import ApiClient from "../Config/ApiCleint";
 import type { ApiResponse } from "../types/apiResponses";
 import type { UserProfile, UpdateProfilePayload, VerificationType } from "../types/profile";
 
-const BASE = "/api/v1/users/me";
+const BASE = "/users/me";
 
 export const getMyProfile = async (): Promise<UserProfile> => {
   const { data } = await ApiClient.get<ApiResponse<UserProfile>>(BASE);

@@ -1,12 +1,12 @@
 import React from 'react';
 
 // const API_URL = process.env.REACT_APP_API || '';
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+const OAUTH_API_URL = import.meta.env.VITE_OAUTH_API_BASE_URL || 'http://localhost:8080';
 const OAuthButtons: React.FC = () => {
   const handleOAuth = (provider: 'google' | 'github') => {
     // Redirect-based OAuth: backend (passport) handles the provider flow
     // then redirects back to /auth/callback?token=...&user=...
-    window.location.href = `${API_URL}/oauth2/authorization/${provider}`;
+    window.location.href = `${OAUTH_API_URL}/oauth2/authorization/${provider}`;
   };
 
   return (

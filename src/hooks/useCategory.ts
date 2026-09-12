@@ -12,8 +12,8 @@
 //   return { categories, loading, error };
 // };
 // export default useCategory;
-
-import { useAppDispatch, useAppSelector } from "../redux/hooks/index";
+// import { useAppDispatch, useAppSelector } from "../redux/hooks/index";
+import {  useAppSelector } from "../redux/hooks/index";
 // import type { Category } from "../types/category";
 
 const useCategory = () => {

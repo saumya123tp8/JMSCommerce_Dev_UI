@@ -167,9 +167,9 @@ const Register: React.FC = () => {
                   />
 
                   <input
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
+                    type="number"
+                    autoComplete="phone"
+                    placeholder="9876543210"
                     {...register("phone")}
                     className="w-full rounded-xl border border-slate-300 py-3 pl-12 pr-4 outline-none transition-all focus:border-[#5A3825] focus:ring-4 focus:ring-[#5A3825]/10"
                   />
