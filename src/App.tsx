@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import Login from './pages/auth/Login'
+import VerifyEmail from './pages/auth/VerifyEmail'
 import Register from './pages/auth/Register'
 import ForgotPassword from './pages/auth/ForgetPassword'
 import ProductDetailPage from './pages/ProductDetailPage'
@@ -49,6 +50,7 @@ import AdminOrderReportDetail from './pages/admin/reports/AdminOrderReportDetail
 import AdminOrderReportList from './pages/admin/reports/AdminOrderReportList'
 import TermsAndConditions from './pages/TermsAndConditions'
 import ShippingInfo from './pages/ShippingInfo'
+import WelcomeCheckEmail from './pages/WelcomeCheckEmail'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -58,6 +60,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/welcome" element={<WelcomeCheckEmail />} />
           {/* <Route path="/product/:slug" element={<ProductDetails />} /> */}
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/categories" element={<Categories />} />
@@ -68,7 +71,7 @@ function App() {
           <Route path="/dashboard/user/orders/:id" element={<OrderDetailPage />} />
           <Route path="/dashboard/user/reports/:id" element={<ReportDetailPage />} />
           <Route path="/search" element={<Search />} />
-          
+          <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="user" element={<UserDashboard />} />
             <Route path="user/orders" element={<Orders />} />

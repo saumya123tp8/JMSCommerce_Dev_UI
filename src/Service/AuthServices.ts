@@ -51,3 +51,54 @@ export const refreshToken = async () =>{
     throw error;
   }
 }
+
+export const verifyEmail = async (token: string): Promise<ApiResponse<null>> => {
+  try {
+    const response = await apiClient.get<ApiResponse<null>>(
+      "/auth/verify-email",
+      {
+        params: {
+          token,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error verifying email:", error);
+    throw error;
+  }
+};
+
+
+export const resendVerificationEmail = async (token: string): Promise<ApiResponse<null>> => {
+  try {
+    const response = await apiClient.get<ApiResponse<null>>(
+      "/auth/verify-email",
+      {
+        params: {
+          token,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error verifying email:", error);
+    throw error;
+  }
+};
+
+
+export const sendVerificationEmail = async () => {
+  try {
+    const response = await apiClient.post<ApiResponse<null>>(
+      "/auth/reverify-email"
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error("Error in sending verification email:", error);
+    throw error;
+  }
+};

@@ -59,7 +59,7 @@ const Register: React.FC = () => {
 
       toast.success("Registration Successful 🎉");
 
-      navigate("/login");
+      navigate("/welcome");
     } catch (error: any) {
       toast.error(error || "Registration Failed");
     }

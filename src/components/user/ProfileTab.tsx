@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import OtpVerifyDialog from "./OtpVerifyDialog";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
-
+import {sendVerificationEmail} from "@/Service/AuthServices"
 const ProfileTab: React.FC = () => {
   const { profile, setProfile, loading } = useProfile();
   const [submitting, setSubmitting] = useState(false);
@@ -51,8 +51,8 @@ const ProfileTab: React.FC = () => {
 
   const startEmailVerification = async () => {
     try {
-      await requestEmailOtp();
-      setEmailDialogOpen(true);
+      await sendVerificationEmail();
+      // setEmailDialogOpen(true);
     } catch (err) {
       toast.error(extractApiErrorMessage(err));
     }
@@ -94,11 +94,11 @@ const ProfileTab: React.FC = () => {
               <FormLabel>Phone</FormLabel>
               <div className="flex items-center gap-2">
                 <FormControl><Input {...field} /></FormControl>
-                {profile.phoneVerified ? (
+                {/* {profile.phoneVerified ? (
                   <Badge className="shrink-0"><CheckCircle2 className="mr-1 h-3 w-3" />Verified</Badge>
                 ) : (
                   <Button type="button" size="sm" variant="outline" onClick={startPhoneVerification}>Verify</Button>
-                )}
+                )} */}
               </div>
               <FormMessage />
             </FormItem>
@@ -129,13 +129,13 @@ const ProfileTab: React.FC = () => {
         </div>
       )}
 
-      <OtpVerifyDialog type="EMAIL" label="email" open={emailDialogOpen} onOpenChange={setEmailDialogOpen}
+      {/* <OtpVerifyDialog type="EMAIL" label="email" open={emailDialogOpen} onOpenChange={setEmailDialogOpen}
         onVerify={async (otp) => {
           const result = await verifyEmailOtp(otp);
           setProfile((prev) => (prev ? { ...prev, emailVerified: result.emailVerified } : prev));
           toast.success("Email verified");
         }}
-      />
+      /> */}
       <OtpVerifyDialog type="PHONE" label="phone number" open={phoneDialogOpen} onOpenChange={setPhoneDialogOpen}
         onVerify={async (otp) => {
           const result = await verifyPhoneOtp(otp);
