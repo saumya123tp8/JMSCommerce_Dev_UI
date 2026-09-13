@@ -8,12 +8,22 @@ import { usePagedList } from "@/hooks/usePagedList";
 import CategoryFilterBar from "@/components/product/CategoryFilterBar";
 import ProductCard from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
+import ProductFilterBar, {
+  type ProductFilterValues,
+} from "@/components/FilterBar/ProductFilterBar";
 
 const HomePage: React.FC = () => {
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const { products, loading, error } = useHomeProducts(activeCategoryId);
   const { visibleItems, hasMore, loadMore, reset } = usePagedList(products, 12);
-
+  const [filters, setFilters] = useState<ProductFilterValues>({
+    minPrice: "",
+    maxPrice: "",
+    minRating: "",
+    saleOnly: false,
+    inStock: false,
+    sort: "relevance",
+  });
   // Reset "load more" progress whenever the category filter changes,
   // so switching categories doesn't carry over a stale page count.
   useEffect(() => {
@@ -53,6 +63,20 @@ const HomePage: React.FC = () => {
             onChange={setActiveCategoryId}
           />
         </div>
+            <ProductFilterBar
+                values={filters}
+                onChange={setFilters}
+                onClear={() =>
+                  setFilters({
+                    minPrice: "",
+                    maxPrice: "",
+                    minRating: "",
+                    saleOnly: false,
+                    inStock: false,
+                    sort: "relevance",
+                  })
+                }
+              />
 
         {error && (
           <div className="mb-6 rounded-md border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-destructive">
