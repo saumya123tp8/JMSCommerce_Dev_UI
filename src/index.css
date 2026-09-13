@@ -144,6 +144,47 @@ html {
 }
 
 /* global CSS, e.g. index.css, alongside your scrollbar-gutter rule */
-html, body {
-  overflow-x: hidden;
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+html,
+body,
+#root {
+  overflow-x: clip;
+}
+
+/* Keep every page inside the mobile layout viewport. */
+@media (max-width: 767px) {
+  body {
+    min-width: 0;
+  }
+}
+
+/* Mobile interaction polish (visual only). */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

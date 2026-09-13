@@ -26,14 +26,15 @@ const Header: React.FC = () => {
   };
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 border-b bg-white shadow-sm">
-      <div className="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-4">
+    <nav className="fixed inset-x-0 top-0 z-50 border-b border-[#E8DDD0] bg-white/95 shadow-[0_4px_18px_rgba(46,31,20,0.08)] backdrop-blur-md">
+      <div className="flex min-h-16 items-center justify-between gap-3 px-4 py-2.5 md:px-6 md:py-4">
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2 whitespace-nowrap text-lg font-bold tracking-wide md:text-xl"
+          className="min-w-0 flex items-center gap-2 whitespace-nowrap text-base font-bold tracking-wide text-[#2E1F14] sm:text-lg md:text-xl"
         >
-          ☕ Ambani Coffee
+          <span aria-hidden="true">☕</span>
+          <span className="truncate">Ambani Coffee</span>
         </Link>
 
         {/* Search - desktop only, mobile gets its own permanent row below */}
@@ -116,28 +117,28 @@ const Header: React.FC = () => {
         <div className="relative md:hidden">
           <button
             onClick={() => setAccountMenuOpen((v) => !v)}
-            className="flex items-center justify-center"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E8DDD0] bg-[#FBF7F2] transition-colors hover:bg-[#F3EAE0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E1F14]/30"
             aria-label="Account menu"
           >
             <CircleUserRound className="h-7 w-7 text-[#3F2E22]" strokeWidth={1.5} />
           </button>
 
           {accountMenuOpen && (
-            <div className="absolute right-0 top-full z-[60] mt-2 w-44 max-w-[calc(100vw-2rem)] rounded-md border bg-white py-1 shadow-md">
+            <div className="absolute right-0 top-full z-[60] mt-2 w-48 max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-[#E8DDD0] bg-white p-1 shadow-lg">
       
               {!auth?.isAuthenticated ? (
                 <>
                   <NavLink
                     to="/login"
                     onClick={() => setAccountMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#3F2E22] hover:bg-gray-100"
+                    className="block min-h-11 rounded-lg px-3 py-2.5 text-sm text-[#3F2E22] transition-colors hover:bg-[#F7F2EC]"
                   >
                     Login
                   </NavLink>
                   <NavLink
                     to="/register"
                     onClick={() => setAccountMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#3F2E22] hover:bg-gray-100"
+                    className="block min-h-11 rounded-lg px-3 py-2.5 text-sm text-[#3F2E22] transition-colors hover:bg-[#F7F2EC]"
                   >
                     Register
                   </NavLink>
@@ -147,13 +148,13 @@ const Header: React.FC = () => {
                   <NavLink
                     to={`/dashboard/${isDashboardAdmin ? "admin" : "user"}`}
                     onClick={() => setAccountMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#3F2E22] hover:bg-gray-100"
+                    className="block min-h-11 rounded-lg px-3 py-2.5 text-sm text-[#3F2E22] transition-colors hover:bg-[#F7F2EC]"
                   >
                     Dashboard
                   </NavLink>
                   <button
                     onClick={handleLogout}
-                    className="block w-full px-4 py-2 text-left text-sm text-[#3F2E22] hover:bg-gray-100"
+                    className="block min-h-11 w-full rounded-lg px-3 py-2.5 text-left text-sm text-[#3F2E22] transition-colors hover:bg-[#F7F2EC]"
                   >
                     Logout
                   </button>
@@ -165,7 +166,7 @@ const Header: React.FC = () => {
       </div>
 
       {/* Mobile: permanent search row, no toggle */}
-      <div className="border-t px-4 py-2 md:hidden">
+      <div className="border-t border-[#E8DDD0] bg-[#FCFAF7] px-3 py-2.5 md:hidden">
         <SearchInput />
       </div>
     </nav>

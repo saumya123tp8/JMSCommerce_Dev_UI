@@ -8,7 +8,7 @@
    /* ── Button shell ────────────────────────────── */
    .fcbh {
      position: fixed;
-     bottom: 28px;
+     bottom: calc(24px + env(safe-area-inset-bottom));
      
      left: 28px;
      right: auto;
@@ -210,8 +210,9 @@
    /* ── Mobile ──────────────────────────────────── */
    @media (max-width: 480px) {
      .fcbh {
-       bottom: 20px;
-       right: 20px;
+       bottom: calc(16px + env(safe-area-inset-bottom));
+       right: 16px;
+       left: auto;
        width: 52px;
        height: 52px;
      }

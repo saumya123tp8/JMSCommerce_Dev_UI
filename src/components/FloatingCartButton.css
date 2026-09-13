@@ -8,7 +8,8 @@
 /* ── Button shell ────────────────────────────── */
 .fcb {
   position: fixed;
-  bottom: 28px;
+  /* bottom: 28px; */
+  bottom: calc(24px + env(safe-area-inset-bottom));
   right: 28px !important;
   z-index: 999;
 
@@ -208,8 +209,8 @@
 /* ── Mobile ──────────────────────────────────── */
 @media (max-width: 480px) {
   .fcb {
-    bottom: 20px;
-    right: 20px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    right: 16px;
     width: 52px;
     height: 52px;
   }

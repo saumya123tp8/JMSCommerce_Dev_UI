@@ -44,9 +44,9 @@ const Layout: React.FC<LayoutProps> = ({
   // );
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen w-full min-w-0 max-w-full flex-col overflow-x-clip">
       <Header />
-      <main className="flex-1 pt-16 md:pt-20">
+      <main className="min-w-0 w-full max-w-full flex-1 overflow-x-clip pt-[120px] md:pt-20">
         <Toaster />
         {children}
       </main>
@@ -56,6 +56,7 @@ const Layout: React.FC<LayoutProps> = ({
       <Footer />
     </div>
   );
+
 };
 
 export default Layout;
