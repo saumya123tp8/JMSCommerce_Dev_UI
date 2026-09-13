@@ -1,0 +1,226 @@
+/* ============================================
+   FloatingCartButton.css
+   Floating sticky cart button with steam + bump animations
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&display=swap');
+
+/* ── Button shell ────────────────────────────── */
+.fcb {
+  position: fixed;
+  bottom: 28px;
+  right: 28px !important;
+  z-index: 999;
+
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+
+  background: #1a1a1a;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.25),
+    0 1px 4px rgba(0, 0, 0, 0.15);
+
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.2s ease,
+              background 0.2s ease;
+
+  /* entrance animation */
+  animation: fcbEnter 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+
+  /* overflow visible so steam + ripple can escape */
+  overflow: visible;
+}
+
+@keyframes fcbEnter {
+  from { opacity: 0; transform: scale(0.4) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.fcb:hover {
+  background: #2d2926;
+  transform: translateY(-3px) scale(1.06);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fcb:active {
+  transform: scale(0.94);
+}
+
+/* ── Bump animation (on cart add) ──────────── */
+.fcb--bump {
+  animation: fcbBump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fcbBump {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.22) rotate(-8deg); }
+  60%  { transform: scale(0.95) rotate(4deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* ── Cup icon ────────────────────────────────── */
+.fcb__icon {
+  width: 24px;
+  height: 24px;
+  color: #c9a84c;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s ease;
+}
+
+.fcb:hover .fcb__icon {
+  color: #e8c96a;
+}
+
+/* ── Count badge ─────────────────────────────── */
+.fcb__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+
+  background: #c9a84c;
+  color: #1a1a1a;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+
+  border-radius: 100px;
+  border: 2px solid #1a1a1a;
+
+  animation: badgePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: background 0.2s ease;
+}
+
+@keyframes badgePop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── Steam lines ─────────────────────────────── */
+.fcb__steam {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.fcb__steam-line {
+  display: block;
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(201, 168, 76, 0.5);
+  animation: steam 2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Stagger heights and delays */
+.fcb__steam-line:nth-child(1) {
+  height: 8px;
+  animation-delay: 0s;
+}
+.fcb__steam-line:nth-child(2) {
+  height: 11px;
+  animation-delay: 0.4s;
+}
+.fcb__steam-line:nth-child(3) {
+  height: 7px;
+  animation-delay: 0.8s;
+}
+
+@keyframes steam {
+  0%   { opacity: 0;   transform: scaleX(1)   translateY(0); }
+  30%  { opacity: 0.7; transform: scaleX(1.3) translateY(-4px); }
+  70%  { opacity: 0.4; transform: scaleX(0.8) translateY(-9px); }
+  100% { opacity: 0;   transform: scaleX(1)   translateY(-12px); }
+}
+
+/* Pause steam on hover so it doesn't look jittery during interaction */
+.fcb:hover .fcb__steam-line {
+  animation-play-state: paused;
+}
+
+/* ── Ripple on bump ──────────────────────────── */
+.fcb__ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 168, 76, 0.6);
+  animation: ripple 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0%   { transform: scale(1);   opacity: 1; }
+  100% { transform: scale(2);   opacity: 0; }
+}
+
+/* ── Tooltip on hover ────────────────────────── */
+.fcb::after {
+  content: "View Cart";
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+
+  background: #1a1a1a;
+  color: #f7f5f1;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.fcb:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .fcb {
+    bottom: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .fcb__icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  /* Hide tooltip on mobile — no hover */
+  .fcb::after {
+    display: none;
+  }
+}

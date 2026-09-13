@@ -93,7 +93,7 @@ export const resendVerificationEmail = async (token: string): Promise<ApiRespons
 export const sendVerificationEmail = async (): Promise<ApiResponse<null>> => {
   try {
     const response = await apiClient.post<ApiResponse<null>>(
-      "/auth/reverify-email"
+      "/mail/reverify-email"
     );
 
     return response.data;

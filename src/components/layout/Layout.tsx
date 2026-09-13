@@ -3,6 +3,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 // import { Helmet } from "react-helmet-async";
 import { Toaster } from "react-hot-toast";
+import FloatingHomeButton from "../FloatingHomeButton";
+import FloatingCartButton from "../FloatingCartButton";
 // import FloatingCartButton from "../../pages/FloatingCartButton";
 // import FloatingHomeButton from "../../pages/FloatingHomeButton";
 
@@ -44,12 +46,13 @@ const Layout: React.FC<LayoutProps> = ({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-  
       <main className="flex-1 pt-16 md:pt-20">
         <Toaster />
         {children}
       </main>
   
+      <FloatingHomeButton />
+      <FloatingCartButton />
       <Footer />
     </div>
   );

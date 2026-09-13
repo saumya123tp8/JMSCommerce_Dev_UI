@@ -1,6 +1,6 @@
 import ApiClient from "../Config/ApiCleint";
 import type { ApiResponse } from "../types/apiResponses";
-import type { UserProfile, UpdateProfilePayload, VerificationType } from "../types/profile";
+import type { UserProfile, UpdateProfilePayload } from "../types/profile";
 
 const BASE = "/users/me";
 

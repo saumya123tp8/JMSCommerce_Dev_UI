@@ -1,4 +1,5 @@
 import React from "react";
+import { Search } from "lucide-react";
 
 const SearchInput: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -11,20 +12,17 @@ const SearchInput: React.FC = () => {
   };
 
   return (
-    <form className="flex w-full items-center gap-2" role="search" onSubmit={handleSubmit}>
+    <form className="relative w-full" role="search" onSubmit={handleSubmit}>
+      <Search
+        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
+        aria-hidden="true"
+      />
       <input
         type="search"
-        placeholder="Search"
+        placeholder="Search coffee, snacks..."
         aria-label="Search"
-        className="w-full min-w-0 rounded-md border border-gray-300 px-3 py-1.5 text-sm outline-none focus:border-black"
+        className="w-full min-w-0 rounded-full border border-gray-300 bg-gray-50 py-2 pl-9 pr-3 text-sm outline-none transition-colors focus:border-[#4A3428] focus:bg-white"
       />
-      <button
-        type="submit"
-        className="shrink-0 rounded-md p-1.5 text-lg lg:hidden"
-        aria-label="Submit search"
-      >
-        🔍
-      </button>
     </form>
   );
 };

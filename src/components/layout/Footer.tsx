@@ -12,12 +12,16 @@ import {
   faPhone,
   faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import FloatingHomeButton from "../FloatingHomeButton";
+import FloatingCartButton from "../FloatingCartButton";
 
 const Footer: React.FC = () => {
   return (
+    <>
+    <FloatingHomeButton />
+    <FloatingCartButton />
     
-// {/*    // <footer className="relative z-[100] overflow-hidden bg-gradient-to-br from-[#3D1F0A] to-[#7A6352] pt-[10px] pb-[5px] text-white">
-//       {/* Animated top bar (was .footer::before) */} */}
+
     <footer className="w-full bg-gradient-to-br from-[#3D1F0A] to-[#7A6352] pt-[10px] pb-[5px] text-white">
      <div className="absolute inset-x-0 top-0 h-1 animate-gradient-shift bg-gradient-to-r from-[#1E0F05] via-[#3D1F0A] via-[#7B4F2E] to-[#C8A882]" />
       <div className="mx-auto max-w-[1200px] px-5">
@@ -138,6 +142,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 

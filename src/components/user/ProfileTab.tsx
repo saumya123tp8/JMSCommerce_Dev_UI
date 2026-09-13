@@ -10,7 +10,6 @@ import { profileSchema, type ProfileFormValues } from "@/schema/profile";
 import { extractApiErrorMessage } from "@/lib/apiError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 // import OtpVerifyDialog from "./OtpVerifyDialog";
 import { CheckCircle2, AlertTriangle, Mail } from "lucide-react";
