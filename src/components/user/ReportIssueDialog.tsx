@@ -47,15 +47,7 @@ const ReportIssueDialog: React.FC<Props> = ({ orderId, orderNumber, open, onOpen
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* <DialogContent className="sm:max-w-md"> */}
-      <DialogContent
-  className="
-    w-[calc(100vw-2rem)]
-    max-w-md
-    max-h-[calc(100vh-2rem)]
-    overflow-y-auto
-  "
->
+      <DialogContent>
         <DialogHeader><DialogTitle>Report an Issue</DialogTitle></DialogHeader>
         <p className="mb-3 text-sm text-muted-foreground">Order #{orderNumber}</p>
         <RadioGroup value={reason} onValueChange={(v) => setReason(v as OrderReportReason)} className="space-y-2">

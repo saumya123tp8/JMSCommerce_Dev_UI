@@ -51,3 +51,13 @@ export interface ProductSpecificationValue {
   specificationName: string;
   value: string;
 }
+
+export interface ProductSearchResponse {
+  content: Product[];
+  page: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  first: boolean;
+  last: boolean;
+}

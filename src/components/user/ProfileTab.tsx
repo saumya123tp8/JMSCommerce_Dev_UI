@@ -18,7 +18,16 @@ const ProfileTab: React.FC = () => {
   const { profile, setProfile, loading } = useProfile();
   const [submitting, setSubmitting] = useState(false);
   const [sending, setSending] = useState(false);
+  const [cooldown, setCooldown] = useState(0);
+  useEffect(() => {
+    if (cooldown <= 0) return;
   
+    const timerId = setInterval(() => {
+      setCooldown((prev) => prev - 1);
+    }, 1000);
+  
+    return () => clearInterval(timerId);
+  }, [cooldown]);
   // const [emailDialogOpen, setEmailDialogOpen] = useState(false);
   // const [phoneDialogOpen, setPhoneDialogOpen] = useState(false);
 
@@ -51,10 +60,12 @@ const ProfileTab: React.FC = () => {
   };
 
   const startEmailVerification = async () => {
+    if (sending || cooldown > 0) return; // Guard clause
     setSending(true);
     try {
       const res = await sendVerificationEmail();
       toast.success(res.message || "Verification email sent — check your inbox.");
+      setCooldown(30); // Start 30-second timer on success
     } catch(err){
       toast.error("Couldn't send verification email. Try again shortly.");
       toast.error(extractApiErrorMessage(err));
@@ -97,10 +108,24 @@ const ProfileTab: React.FC = () => {
                   <CheckCircle2 className="h-4 w-4" /> Verified
                 </span>
               ) : (
-                <Button size="sm" variant="outline" onClick={startEmailVerification} disabled={sending}>
-                  <Mail className="mr-1 h-3.5 w-3.5" />
-                  {sending ? "Sending…" : "Verify email"}
-                </Button>
+                // <Button size="sm" variant="outline" onClick={startEmailVerification} disabled={sending}>
+                //   <Mail className="mr-1 h-3.5 w-3.5" />
+                //   {sending ? "Sending…" : "Verify email"}
+                // </Button>
+              <Button 
+                size="sm"
+                variant="outline"
+                onClick={startEmailVerification} 
+                disabled={sending || cooldown > 0}
+              >
+                <Mail className="mr-1 h-3.5 w-3.5" />
+                {cooldown > 0 
+                  ? `Resend in ${cooldown}s` 
+                  : sending 
+                  ? "Sending..." 
+                  : "Resend Verification Email"
+                }
+              </Button>
               )}
             </div>
           </FormItem>
@@ -138,10 +163,17 @@ const ProfileTab: React.FC = () => {
         </form>
       </Form>
 
-      {(!profile.emailVerified || !profile.phoneVerified) && (
+      {/* {(!profile.emailVerified || !profile.phoneVerified) && (
         <div className="flex items-start gap-2 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <span>Verify your {!profile.emailVerified && !profile.phoneVerified ? "email and phone" : !profile.emailVerified ? "email" : "phone"} to secure your account.</span>
+        </div>
+      )} */}
+
+     {(!profile.emailVerified) && (
+        <div className="flex items-start gap-2 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+          <span>Verify your email to secure your account.</span>
         </div>
       )}
 

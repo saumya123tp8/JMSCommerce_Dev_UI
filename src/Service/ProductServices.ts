@@ -6,6 +6,8 @@ import type {
   CreateProductPayload,
   UpdateProductPayload,
   ProductSpecificationValue,
+  ProductSearchResponse,
+  
 } from "../types/product";
 
 const BASE = "/products";
@@ -59,6 +61,32 @@ export const getProductsByCategory = async (
     `${BASE}/search`,
     { params: { categoryName: categoryId } }
   );
+  return data.data;
+};
+
+export interface ProductSearchParams {
+  search?: string;
+  categoryId?: number;
+  brandId?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  minRating?: number;
+  inStock?: boolean;
+  sale?: boolean;
+  sort?: "relevance" | "newest" | "price_asc" | "price_desc" | "rating" | "name";
+  page?: number;
+  size?: number;
+}
+
+export const searchProducts = async (
+  params: ProductSearchParams
+): Promise<ProductSearchResponse> => {
+  const { data } = await ApiClient.get<
+    ApiResponse<ProductSearchResponse>
+  >(`${BASE}/search/filter`, {
+    params,
+  });
+
   return data.data;
 };
 

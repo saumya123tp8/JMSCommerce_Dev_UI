@@ -55,18 +55,18 @@ const OrderReviewDialog: React.FC<Props> = ({ order, open, onOpenChange }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="gap-5 sm:max-w-md">
-        <DialogHeader className="pr-10">
-          <DialogTitle className="text-lg sm:text-xl">Review your order</DialogTitle>
-          <p className="break-all text-xs text-muted-foreground sm:text-sm">{order.orderNumber}</p>
+      <DialogContent className="">
+        <DialogHeader>
+          <DialogTitle>Review your order</DialogTitle>
         </DialogHeader>
+        <p className="mb-3 text-sm text-muted-foreground">{order.orderNumber}</p>
 
         {order.orderStatus !== "DELIVERED" ? (
           <p className="text-sm text-muted-foreground">
             You can review items once this order is delivered.
           </p>
         ) : (
-          <div className="space-y-3.5">
+          <div className="space-y-3">
             {order.orderItems.map((item, idx) => {
               // REQUIRED BACKEND FIX: OrderItem needs a real id field
               // for review creation to work. Items without one can't
@@ -77,24 +77,23 @@ const OrderReviewDialog: React.FC<Props> = ({ order, open, onOpenChange }) => {
               const isExpanded = orderItemId !== undefined && expandedItemId === orderItemId;
 
               return (
-                <div key={`${item.variantId}-${idx}`} className="rounded-2xl border border-[#E8DDD0] bg-[#FFFCF9] p-3.5 shadow-sm">
+                <div key={`${item.variantId}-${idx}`} className="rounded-md border p-3">
                   <div className="flex items-center gap-3">
                     <img
                       src={item.productImage}
                       alt={item.productName}
-                      className="h-14 w-14 shrink-0 rounded-xl object-cover ring-1 ring-black/5"
+                      className="h-12 w-12 rounded object-cover"
                     />
                     <div className="min-w-0 flex-1">
-                      <p className="line-clamp-2 text-sm font-semibold leading-snug text-[#2E1F14]">{item.productName}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{item.variantName}</p>
+                      <p className="text-sm font-medium text-[#2E1F14]">{item.productName}</p>
+                      <p className="text-xs text-muted-foreground">{item.variantName}</p>
                     </div>
                     {orderItemId === undefined ? (
-                      <span className="mt-0.5 text-xs text-muted-foreground">Not available yet</span>
+                      <span className="text-xs text-muted-foreground">Not available yet</span>
                     ) : isSubmitted ? (
                       <span className="text-xs font-medium text-green-700">Reviewed ✓</span>
                     ) : (
                       <Button
-                        className="shrink-0"
                         size="sm"
                         variant="outline"
                         onClick={() => {
@@ -112,10 +111,10 @@ const OrderReviewDialog: React.FC<Props> = ({ order, open, onOpenChange }) => {
                   </div>
 
                   {isExpanded && orderItemId !== undefined && (
-                    <div className="mt-3 space-y-3 border-t border-[#E8DDD0] pt-3">
-                      <div className="flex gap-1.5">
+                    <div className="mt-3 space-y-2 border-t pt-3">
+                      <div className="flex gap-1">
                         {Array.from({ length: 5 }).map((_, i) => (
-                          <button key={i} type="button" onClick={() => setRating(i + 1)} className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-[#F3EAE0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E1F14]/30" aria-label={`Rate ${i + 1} star${i === 0 ? "" : "s"}`}>
+                          <button key={i} type="button" onClick={() => setRating(i + 1)}>
                             <Star
                               className={cn(
                                 "h-5 w-5",
@@ -136,10 +135,8 @@ const OrderReviewDialog: React.FC<Props> = ({ order, open, onOpenChange }) => {
                         value={reviewText}
                         onChange={(e) => setReviewText(e.target.value)}
                         maxLength={3000}
-                        className="min-h-28 resize-none"
                       />
                       <Button
-                        className="w-full sm:w-auto"
                         size="sm"
                         onClick={() => handleSubmit(orderItemId)}
                         disabled={submitting}

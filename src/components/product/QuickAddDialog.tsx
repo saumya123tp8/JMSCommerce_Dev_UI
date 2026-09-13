@@ -202,7 +202,7 @@ const QuickAddDialog: React.FC<Props> = ({ product, open, onOpenChange }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-md">
+      <DialogContent className="">
         <DialogHeader>
           <DialogTitle className="font-serif text-2xl text-[#2E1F14]">
             Customize your {product.name}

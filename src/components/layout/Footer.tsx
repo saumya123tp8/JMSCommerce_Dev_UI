@@ -16,46 +16,46 @@ import {
 const Footer: React.FC = () => {
   return (
     <>
-    <footer className="w-full bg-gradient-to-br from-[#3D1F0A] to-[#7A6352] pt-8 pb-6 md:pt-[10px] md:pb-[5px] text-white">
+    <footer className="w-full bg-gradient-to-br from-[#3D1F0A] to-[#7A6352] pt-[10px] pb-[5px] text-white">
      <div className="absolute inset-x-0 top-0 h-1 animate-gradient-shift bg-gradient-to-r from-[#1E0F05] via-[#3D1F0A] via-[#7B4F2E] to-[#C8A882]" />
       <div className="mx-auto max-w-[1200px] px-5">
         {/* Main Footer Content */}
-        <div className="mb-6 grid grid-cols-1 gap-7 text-center md:grid-cols-2 md:gap-[30px] md:text-left lg:grid-cols-[2fr_1fr]">
+        <div className="mb-[10px] grid grid-cols-1 gap-5 text-center md:grid-cols-2 md:gap-[30px] md:text-left lg:grid-cols-[2fr_1fr]">
           {/* Brand Section */}
           <div className="pr-0 lg:pr-5">
-            <h3 className="mb-2 bg-gradient-to-r from-white to-[#f0f8ff] bg-clip-text text-2xl font-bold text-transparent md:mb-[15px] md:text-4xl">
+            <h3 className="mb-[5px] bg-gradient-to-r from-white to-[#f0f8ff] bg-clip-text text-lg font-bold text-transparent md:mb-[15px] md:text-4xl">
               JMS Commerce
             </h3>
-            <p className="mb-4 text-sm leading-relaxed opacity-90 md:mb-[25px] md:text-base md:leading-[1.6]">
+            <p className="mb-[5px] text-[0.6rem] leading-none opacity-90 md:mb-[25px] md:text-base md:leading-[1.6]">
               Your trusted partner for quality products and exceptional
               service.
             </p>
-            <div className="flex justify-center gap-3 lg:justify-start">
+            <div className="flex justify-center gap-[15px] lg:justify-start">
               <a
                 href="https://www.facebook.com/saumya.keservani.7"
                 aria-label="Facebook"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#3b5998]/20 text-base text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-[#3b5998]/20 text-[0.85rem] text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
               >
                 <FontAwesomeIcon icon={faFacebookF} />
               </a>
               <a
                 href="https://www.instagram.com/saumyakeservani/"
                 aria-label="Instagram"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#e1306c]/20 text-base text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-[#e1306c]/20 text-[0.85rem] text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
               >
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
               <a
                 href="https://twitter.com/KeservaniS16527"
                 aria-label="Twitter"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#1da1f2]/20 text-base text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-[#1da1f2]/20 text-[0.85rem] text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
               >
                 <FontAwesomeIcon icon={faTwitter} />
               </a>
               <a
                 href="https://www.youtube.com/channel/UCHWbzfO5hbwKs1KttjYmtTA"
                 aria-label="YouTube"
-                className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#ff0000]/20 text-base text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-[#ff0000]/20 text-[0.85rem] text-white backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[5px] hover:scale-105 hover:shadow-[0_15px_35px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px] md:rounded-xl md:border-2 md:border-white/10 md:text-xl"
               >
                 <FontAwesomeIcon icon={faYoutube} />
               </a>
@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
                   icon={faEnvelope}
                   className="mt-0.5 h-3.5 w-3.5 text-[#4ecdc4] md:h-[22px] md:w-[22px]"
                 />
-                <span className="text-sm leading-relaxed opacity-90 md:text-base">
+                <span className="text-[0.8rem] leading-[1.3] opacity-90 md:text-base">
                   hello@jmscommerce.com
                 </span>
               </div>
@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
                   icon={faPhone}
                   className="mt-0.5 h-3.5 w-3.5 text-[#4ecdc4] md:h-[22px] md:w-[22px]"
                 />
-                <span className="text-sm leading-relaxed opacity-90 md:text-base">
+                <span className="text-[0.8rem] leading-[1.3] opacity-90 md:text-base">
                   +1 (555) 123-4567
                 </span>
               </div>
@@ -88,7 +88,7 @@ const Footer: React.FC = () => {
                   icon={faMapMarkerAlt}
                   className="mt-0.5 h-3.5 w-3.5 text-[#4ecdc4] md:h-[22px] md:w-[22px]"
                 />
-                <span className="text-sm leading-relaxed opacity-90 md:text-base">
+                <span className="text-[0.8rem] leading-[1.3] opacity-90 md:text-base">
                   123 Commerce St, Business City
                 </span>
               </div>
