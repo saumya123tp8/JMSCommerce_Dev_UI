@@ -55,7 +55,7 @@ const OrderReviewDialog: React.FC<Props> = ({ order, open, onOpenChange }) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-lg">
+      <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-sm">
         <DialogHeader>
           <DialogTitle>Review your order</DialogTitle>
         </DialogHeader>

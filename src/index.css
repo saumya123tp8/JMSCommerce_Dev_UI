@@ -138,3 +138,12 @@
     transform: translateX(100%);
   }
 }
+
+html {
+  scrollbar-gutter: stable;
+}
+
+/* global CSS, e.g. index.css, alongside your scrollbar-gutter rule */
+html, body {
+  overflow-x: hidden;
+}

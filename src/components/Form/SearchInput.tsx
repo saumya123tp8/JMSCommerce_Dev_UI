@@ -1,48 +1,31 @@
 import React from "react";
-// import { useSearch } from "../../context/search";
-// import axios from "axios";
-// import { useNavigate } from "react-router";
 
 const SearchInput: React.FC = () => {
-//   const [values, setValues] = useSearch();
-  // const [values, setValues] = useState("");
-
-  // const navigate = useNavigate();
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-    //   const { data } = await axios.get(
-    //     `${process.env.REACT_APP_API}/api/v1/product/search/${values.keyword}`
-    //   );
-    //   setValues({ ...values, results: data });
-    //   navigate("/search");
+      // TODO: wire up search
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div>
-      <form className="d-flex" role="search" onSubmit={handleSubmit}>
-        <input
-          className="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          // value={values.keyword}
-          // onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            // setValues({ ...values, keyword: e.target.value })
-          // }
-        />
-        <button
-          className="btn p-0 border-0 bg-transparent d-lg-none fs-5"
-          type="submit"
-        >
-          🔍
-        </button>
-      </form>
-    </div>
+    <form className="flex w-full items-center gap-2" role="search" onSubmit={handleSubmit}>
+      <input
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        className="w-full min-w-0 rounded-md border border-gray-300 px-3 py-1.5 text-sm outline-none focus:border-black"
+      />
+      <button
+        type="submit"
+        className="shrink-0 rounded-md p-1.5 text-lg lg:hidden"
+        aria-label="Submit search"
+      >
+        🔍
+      </button>
+    </form>
   );
 };
 

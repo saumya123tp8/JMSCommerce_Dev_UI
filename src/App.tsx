@@ -4,7 +4,8 @@ import HomePage from './pages/HomePage'
 import Login from './pages/auth/Login'
 import VerifyEmail from './pages/auth/VerifyEmail'
 import Register from './pages/auth/Register'
-import ForgotPassword from './pages/auth/ForgetPassword'
+import ForgotPassword from './pages/auth/ForgotPassword'
+import ResetPassword from './pages/auth/ResetPassword'
 import ProductDetailPage from './pages/ProductDetailPage'
 import Categories from './pages/Categories'
 import CartPage from './pages/CartPage'
@@ -124,6 +125,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+    path="/reset-password"
+    element={<ResetPassword />}
+/>
           <Route path="/contact" element={<Contact />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/terms" element={<TermsAndConditions />} />

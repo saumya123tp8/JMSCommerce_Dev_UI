@@ -3,10 +3,12 @@ import { useEffect, useRef,useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { Mail, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import { verifyEmail, resendVerificationEmail } from "@/Service/AuthServices";
+import { useAppSelector } from "@/redux/hooks";
 
 type Status = "loading" | "success" | "error";
  
 const VerifyEmail = () => {
+  const auth = useAppSelector((state) => state.auth);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -39,7 +41,10 @@ const VerifyEmail = () => {
         const response = await verifyEmail(token);
         setStatus(response.success ? "success" : "error");
         setMessage(response.message);
-        if (response.success) setTimeout(() => navigate("/login"), 3000);
+        if (response.success){
+          const destination = (auth?.isAuthenticated) ? "/dashboard/user/profile" : "/login";
+          setTimeout(() => navigate(destination), 3000);
+        }
       } catch {
         setStatus("error");
         setMessage("We couldn't verify your email.");

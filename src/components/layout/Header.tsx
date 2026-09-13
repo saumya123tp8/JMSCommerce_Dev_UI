@@ -44,7 +44,8 @@ const Header: React.FC = () => {
 
   
   return (
-    <nav className="fixed top-0 z-50 w-full border-b bg-white shadow-sm">
+    <nav className="fixed inset-x-0 overflow-x-hidden top-0 z-100 border-b bg-white shadow-sm">
+  
       <div className="flex items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-4">
         {/* Logo */}
         <Link

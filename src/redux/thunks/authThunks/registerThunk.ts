@@ -23,8 +23,7 @@ export const registerThunk = createAsyncThunk<
       return response;
     } catch (err: any) {
       return thunkAPI.rejectWithValue(
-        err.response?.data?.message ??
-          "Registration Failed"
+       err.error
       );
     }
   }

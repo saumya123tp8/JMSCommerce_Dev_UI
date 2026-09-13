@@ -113,7 +113,7 @@ const UserDashboard: React.FC = () => {
         <h1 className="mb-6 font-serif text-3xl text-[#2E1F14]">My Account</h1>
 
         <div className="flex flex-col gap-6 md:flex-row">
-          <nav className="grid w-full grid-cols-4 gap-1 md:flex md:w-30 md:flex-col">
+          <nav className="grid w-full grid-cols-4 gap-1 md:flex md:w-32 md:flex-col">
             {tabs.map((t) => {
               const Icon = t.icon;
 
@@ -150,15 +150,16 @@ const UserDashboard: React.FC = () => {
                 ) : (
                   <>
                     {orders.map((order) => (
-                      <div key={order.id} className="rounded-xl border border-[#E8DDD0] bg-white p-4">
-                        <div className="mb-2 flex items-center justify-between">
+                      <div key={order.id} className="min-w-0 rounded-xl border border-[#E8DDD0] bg-white p-4">
+                        <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                           <button
                             onClick={() => navigate(`/dashboard/user/orders/${order.id}`)}
-                            className="font-mono text-sm underline"
+                            className="min-w-0 truncate font-mono text-sm underline"
+                            title={order.orderNumber}
                           >
                             {order.orderNumber}
                           </button>
-                          <div className="flex gap-2">
+                          <div className="flex shrink-0 gap-2">
                             <Badge>{order.orderStatus}</Badge>
                             <Badge variant="secondary">{order.paymentStatus}</Badge>
                           </div>
@@ -173,28 +174,31 @@ const UserDashboard: React.FC = () => {
                           <Button
                             size="sm"
                             variant="outline"
+                            className="min-w-0"
                             disabled={order.orderStatus === "CANCELLED"}
                             onClick={() => setReportOrder(order)}
                           >
-                            <Flag className="mr-1 h-3.5 w-3.5" />
-                            Report
+                            <Flag className="mr-1 h-3.5 w-3.5 shrink-0" />
+                            <span className="truncate">Report</span>
                           </Button>
                           <Button
                             size="sm"
                             variant="outline"
+                            className="min-w-0"
                             disabled={order.orderStatus !== "DELIVERED"}
                             onClick={() => setReviewOrder(order)}
                           >
-                            <StarIcon className="mr-1 h-3.5 w-3.5" />
-                            Review
+                            <StarIcon className="mr-1 h-3.5 w-3.5 shrink-0" />
+                            <span className="truncate">Review</span>
                           </Button>
                           <Button
                             size="sm"
                             variant="outline"
+                            className="min-w-0"
                             onClick={() => navigate(`/dashboard/user/orders/${order.id}`)}
                           >
-                            <Eye className="mr-1 h-3.5 w-3.5" />
-                            Details
+                            <Eye className="mr-1 h-3.5 w-3.5 shrink-0" />
+                            <span className="truncate">Details</span>
                           </Button>
                         </div>
                       </div>
@@ -233,15 +237,17 @@ const UserDashboard: React.FC = () => {
                     <button
                       key={r.id}
                       onClick={() => navigate(`/dashboard/user/reports/${r.id}`)}
-                      className="block w-full rounded-xl border border-[#E8DDD0] bg-white p-4 text-left hover:bg-[#F3EAE0]"
+                      className="block w-full min-w-0 rounded-xl border border-[#E8DDD0] bg-white p-4 text-left hover:bg-[#F3EAE0]"
                     >
-                      <div className="mb-1 flex items-center justify-between">
-                        <span className="font-mono text-xs text-muted-foreground">{r.orderNumber}</span>
-                        <Badge variant={reportStatusBadgeVariant(r.status)}>
+                      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+                        <span className="min-w-0 truncate font-mono text-xs text-muted-foreground">
+                          {r.orderNumber}
+                        </span>
+                        <Badge variant={reportStatusBadgeVariant(r.status)} className="shrink-0">
                           {r.status.replace("_", " ")}
                         </Badge>
                       </div>
-                      <p className="font-medium text-[#2E1F14]">{reportReasonLabels[r.reason]}</p>
+                      <p className="truncate font-medium text-[#2E1F14]">{reportReasonLabels[r.reason]}</p>
                       <p className="text-xs text-muted-foreground">
                         {new Date(r.updatedAt).toLocaleDateString()}
                       </p>
@@ -253,13 +259,13 @@ const UserDashboard: React.FC = () => {
 
             {tab === "addresses" && (
               <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="min-w-0">
                     <h2 className="text-xl font-semibold text-[#2E1F14]">My Addresses</h2>
                     <p className="mt-1 text-sm text-muted-foreground">Manage your delivery addresses.</p>
                   </div>
                   {!showAddressForm && (
-                    <Button onClick={handleAddAddress}>
+                    <Button onClick={handleAddAddress} className="shrink-0">
                       <Plus className="mr-2 h-4 w-4" />
                       Add Address
                     </Button>
@@ -294,13 +300,13 @@ const UserDashboard: React.FC = () => {
                     ) : (
                       <div className="grid gap-4 md:grid-cols-2">
                         {addresses.map((addr) => (
-                          <div key={addr.id} className="rounded-xl border border-[#E8DDD0] bg-white p-4">
-                            <div className="mb-2 flex items-start justify-between">
-                              <div>
-                                <p className="font-medium text-[#2E1F14]">{addr.receiverName}</p>
+                          <div key={addr.id} className="min-w-0 rounded-xl border border-[#E8DDD0] bg-white p-4">
+                            <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
+                              <div className="min-w-0">
+                                <p className="truncate font-medium text-[#2E1F14]">{addr.receiverName}</p>
                                 <Badge variant="secondary" className="mt-1">{addr.type}</Badge>
                               </div>
-                              {addr.defaultAddress && <Badge>Default</Badge>}
+                              {addr.defaultAddress && <Badge className="shrink-0">Default</Badge>}
                             </div>
 
                             <p className="text-sm text-muted-foreground">{formatAddress(addr)}</p>

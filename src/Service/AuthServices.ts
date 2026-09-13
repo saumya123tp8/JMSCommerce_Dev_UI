@@ -90,7 +90,7 @@ export const resendVerificationEmail = async (token: string): Promise<ApiRespons
 };
 
 
-export const sendVerificationEmail = async () => {
+export const sendVerificationEmail = async (): Promise<ApiResponse<null>> => {
   try {
     const response = await apiClient.post<ApiResponse<null>>(
       "/auth/reverify-email"
@@ -99,6 +99,62 @@ export const sendVerificationEmail = async () => {
     return response.data;
   } catch (error) {
     console.error("Error in sending verification email:", error);
+    throw error;
+  }
+};
+
+export const forgotPassword = async (
+  email: string
+): Promise<ApiResponse<null>> => {
+
+  try {
+
+    const response =
+      await apiClient.post<ApiResponse<null>>(
+        "/auth/forgot-password",
+        {
+          email,
+        }
+      );
+
+    return response.data;
+
+  } catch (error) {
+
+    console.error(
+      "Error requesting password reset:",
+      error
+    );
+
+    throw error;
+  }
+};
+
+export const resetPassword = async (
+  token: string,
+  newPassword: string
+): Promise<ApiResponse<null>> => {
+
+  try {
+
+    const response =
+      await apiClient.post<ApiResponse<null>>(
+        "/auth/reset-password",
+        {
+          token,
+          newPassword,
+        }
+      );
+
+    return response.data;
+
+  } catch (error) {
+
+    console.error(
+      "Error resetting password:",
+      error
+    );
+
     throw error;
   }
 };

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { useProfile } from "@/hooks/useProfile";
 import {
-  updateMyProfile, requestEmailOtp, requestPhoneOtp, verifyEmailOtp, verifyPhoneOtp,
+  updateMyProfile
 } from "@/Service/ProfileServices";
 import { profileSchema, type ProfileFormValues } from "@/schema/profile";
 import { extractApiErrorMessage } from "@/lib/apiError";
@@ -12,14 +12,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import OtpVerifyDialog from "./OtpVerifyDialog";
-import { CheckCircle2, AlertTriangle } from "lucide-react";
+// import OtpVerifyDialog from "./OtpVerifyDialog";
+import { CheckCircle2, AlertTriangle, Mail } from "lucide-react";
 import {sendVerificationEmail} from "@/Service/AuthServices"
 const ProfileTab: React.FC = () => {
   const { profile, setProfile, loading } = useProfile();
   const [submitting, setSubmitting] = useState(false);
-  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
-  const [phoneDialogOpen, setPhoneDialogOpen] = useState(false);
+  const [sending, setSending] = useState(false);
+  
+  // const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  // const [phoneDialogOpen, setPhoneDialogOpen] = useState(false);
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
@@ -50,22 +52,27 @@ const ProfileTab: React.FC = () => {
   };
 
   const startEmailVerification = async () => {
+    setSending(true);
     try {
-      await sendVerificationEmail();
-      // setEmailDialogOpen(true);
-    } catch (err) {
+      const res = await sendVerificationEmail();
+      toast.success(res.message || "Verification email sent — check your inbox.");
+    } catch(err){
+      toast.error("Couldn't send verification email. Try again shortly.");
       toast.error(extractApiErrorMessage(err));
+    } finally {
+      setSending(false);
     }
+    
   };
 
-  const startPhoneVerification = async () => {
-    try {
-      await requestPhoneOtp();
-      setPhoneDialogOpen(true);
-    } catch (err) {
-      toast.error(extractApiErrorMessage(err));
-    }
-  };
+  // const startPhoneVerification = async () => {
+  //   try {
+  //     await requestPhoneOtp();
+  //     setPhoneDialogOpen(true);
+  //   } catch (err) {
+  //     toast.error(extractApiErrorMessage(err));
+  //   }
+  // };
 
   if (loading || !profile) return <p className="text-sm text-muted-foreground">Loading profile...</p>;
 
@@ -81,10 +88,20 @@ const ProfileTab: React.FC = () => {
             <FormLabel>Email</FormLabel>
             <div className="flex items-center gap-2">
               <Input value={profile.email} disabled />
-              {profile.emailVerified ? (
+              {/* {profile.emailVerified ? (
                 <Badge className="shrink-0"><CheckCircle2 className="mr-1 h-3 w-3" />Verified</Badge>
               ) : (
                 <Button type="button" size="sm" variant="outline" onClick={startEmailVerification}>Verify</Button>
+              )} */}
+              {profile.emailVerified ? (
+                <span className="flex items-center gap-1 text-sm text-[#0D9488]">
+                  <CheckCircle2 className="h-4 w-4" /> Verified
+                </span>
+              ) : (
+                <Button size="sm" variant="outline" onClick={startEmailVerification} disabled={sending}>
+                  <Mail className="mr-1 h-3.5 w-3.5" />
+                  {sending ? "Sending…" : "Verify email"}
+                </Button>
               )}
             </div>
           </FormItem>
@@ -136,13 +153,13 @@ const ProfileTab: React.FC = () => {
           toast.success("Email verified");
         }}
       /> */}
-      <OtpVerifyDialog type="PHONE" label="phone number" open={phoneDialogOpen} onOpenChange={setPhoneDialogOpen}
+      {/* <OtpVerifyDialog type="PHONE" label="phone number" open={phoneDialogOpen} onOpenChange={setPhoneDialogOpen}
         onVerify={async (otp) => {
           const result = await verifyPhoneOtp(otp);
           setProfile((prev) => (prev ? { ...prev, phoneVerified: result.phoneVerified } : prev));
           toast.success("Phone verified");
         }}
-      />
+      /> */}
     </div>
   );
 };
